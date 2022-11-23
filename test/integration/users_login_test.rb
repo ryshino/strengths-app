@@ -66,10 +66,32 @@ class LogoutTest < Logout
     assert_redirected_to root_url
   end
 
+  test "2番目のウィンドウでユーザーをログアウトするテスト" do
+    delete logout_path
+    assert_redirected_to root_url
+  end
+
   test "ログアウト後のリンクの表示が正しいかテスト" do
     follow_redirect!
     assert_select "a[href=?]", login_path
     assert_select "a[href=?]", logout_path,      count: 0
     assert_select "a[href=?]", user_path(@user), count: 0
+  end
+end
+
+class RememberingTest < UsersLogin
+#［remember me］チェックボックスのテスト
+
+  test "ログインを記憶する場合" do
+    log_in_as(@user, remember_me: '1')
+    assert_equal cookies['remember_token'], assigns(:user).remember_token
+  end
+
+  test "ログインを記憶しない場合" do
+    # Cookieを保存してログイン
+    log_in_as(@user, remember_me: '1')
+    # Cookieが削除されていることを検証してからログイン
+    log_in_as(@user, remember_me: '0')
+    assert cookies[:remember_token].blank?
   end
 end

@@ -16,5 +16,21 @@ class ActiveSupport::TestCase
   def is_logged_in?
     !session[:user_id].nil?
   end
-  # Add more helper methods to be used by all tests here...
+
+  # 単体テストで使う
+  # テストユーザーとしてログインする
+  def log_in_as(user)
+    session[:user_id] = user.id
+  end
+
+  # 統合テストで使う
+  class ActionDispatch::IntegrationTest
+
+    # テストユーザーとしてログインする
+    def log_in_as(user, password: 'password', remember_me: '1')
+      post login_path, params: { session: { profile: user.profile,
+                                            password: password,
+                                            remember_me: remember_me } }
+    end
+  end
 end
