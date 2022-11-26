@@ -3,7 +3,8 @@ class User < ApplicationRecord
   validates :name,  presence: true, length: { maximum: 50 }
   validates :profile, presence: true, uniqueness: true
   validate :check_profile
-  validates :password, presence: true, length: { minimum: 6 }
+  #:allow_nilオプションは、対象の値がnilの場合にバリデーションをスキップする
+  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
   has_secure_password
 

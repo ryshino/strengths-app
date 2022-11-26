@@ -2,3 +2,26 @@ michael:
   name: Michael Example
   profile: https://libecity.com/user_profile/MichaelExample
   password_digest: <%= User.digest('password') %>
+  admin: true
+
+archer:
+  name: Sterling Archer
+  profile: https://libecity.com/user_profile/ArcherExample
+  password_digest: <%= User.digest('password') %>
+
+lana:
+  name: Lana Kane
+  profile: https://libecity.com/user_profile/LanalExample
+  password_digest: <%= User.digest('password') %>
+
+malory:
+  name: Malory Archer
+  profile: https://libecity.com/user_profile/MaloryExample
+  password_digest: <%= User.digest('password') %>
+
+<% 30.times do |n| %>
+user_<%= n %>:
+  name:  <%= "User #{n}" %>
+  profile: <%= "https://libecity.com/user_profile/user-#{n}" %>
+  password_digest: <%= User.digest('password') %>
+<% end %>
