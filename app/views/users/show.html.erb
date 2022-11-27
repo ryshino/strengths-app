@@ -7,4 +7,13 @@
       </h1>
     </section>
   </aside>
+  <div class="col-md-8">
+    <% if @user.episodes.any? %>
+      <h3>episodes (<%= @user.episodes.count %>)</h3>
+      <ol class="episodes">
+        <%= render @episodes %>
+      </ol>
+      <%= will_paginate @episodes %>
+    <% end %>
+  </div>
 </div>

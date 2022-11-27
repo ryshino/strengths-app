@@ -1,0 +1,7 @@
+<li id="episode-<%= episode.id %>">
+  <span class="user"><%= link_to episode.user.name, episode.user %></span>
+  <span class="content"><%= episode.content %></span>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(episode.created_at) %> ago.
+  </span>
+</li>

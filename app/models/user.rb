@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :episodes
+  has_many :episodes, dependent: :destroy
   validates :name,  presence: true, length: { maximum: 50 }
   validates :profile, presence: true, uniqueness: true
   validate :check_profile
