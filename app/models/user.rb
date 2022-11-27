@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  attr_accessor :remember_token
+  has_many :episodes
   validates :name,  presence: true, length: { maximum: 50 }
   validates :profile, presence: true, uniqueness: true
   validate :check_profile
@@ -7,6 +7,7 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
   has_secure_password
+  attr_accessor :remember_token
 
   def check_profile
     unless self.profile.start_with?("https://libecity.com/user_profile/")

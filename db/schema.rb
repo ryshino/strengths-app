@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_26_084859) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_27_001543) do
+  create_table "episodes", force: :cascade do |t|
+    t.text "content", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "created_at"], name: "index_episodes_on_user_id_and_created_at"
+    t.index ["user_id"], name: "index_episodes_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
     t.string "profile", null: false
@@ -22,4 +31,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_26_084859) do
     t.index ["profile"], name: "index_users_on_profile", unique: true
   end
 
+  add_foreign_key "episodes", "users"
 end
