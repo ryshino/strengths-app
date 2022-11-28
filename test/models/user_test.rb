@@ -67,4 +67,12 @@ class UserTest < ActiveSupport::TestCase
   test "ダイジェストが存在しない場合のauthenticated?のテスト" do
     assert_not @user.authenticated?('')
   end
+
+  test "ユーザーを削除した時、それに紐づくエピソードも削除されるかテスト" do
+    @user.save
+    @user.episodes.create!(content: "Lorem ipsum")
+    assert_difference 'Episode.count', -1 do
+      @user.destroy 
+    end
+  end
 end

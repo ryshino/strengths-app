@@ -9,6 +9,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @episodes = @user.episodes.paginate(page: params[:page])
   end
 
   def new
@@ -55,16 +56,6 @@ class UsersController < ApplicationController
     end
     
     # beforeフィルタ
-
-    # ログイン済みユーザーかどうか確認
-    def logged_in_user
-      unless logged_in?
-        # store_locationによってリクエストされたURLを保存しておく
-        store_location
-        flash[:danger] = "ログインが必要です"
-        redirect_to login_url, status: :see_other
-      end
-    end
 
     # 正しいユーザーかどうか確認
     def correct_user

@@ -25,4 +25,8 @@ class EpisodeTest < ActiveSupport::TestCase
     @episode.content = "a" * 141
     assert_not @episode.valid?
   end
+
+  test "エピソードが新しい順に並んでいるかテスト" do
+    assert_equal episodes(:most_recent), Episode.first
+  end
 end
