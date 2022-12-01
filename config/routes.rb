@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   delete "/logout",  to: "sessions#destroy"
   resources :users
   resources :episodes, only: [:create, :destroy]
+  get '/episodes', to: 'static_pages#home'
 end
