@@ -1,5 +1,6 @@
 class EpisodesController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy]
+  before_action :correct_user,   only: :destroy
 
   def create
     @episode = current_user.episodes.build(episode_params)
@@ -13,11 +14,20 @@ class EpisodesController < ApplicationController
   end
 
   def destroy
+    @episode.destroy
+    flash[:success] = "投稿を削除しました"
+    # 直前のページにリダイレクトしなければ指定したページ(root_url)へリダイレクト
+    redirect_back_or_to(root_url, status: :see_other)
   end
 
   private
 
     def episode_params
       params.require(:episode).permit(:content)
+    end
+
+    def correct_user
+      @episode = current_user.episodes.find_by(id: params[:id])
+      redirect_to root_url, status: :see_other if @episode.nil?
     end
 end

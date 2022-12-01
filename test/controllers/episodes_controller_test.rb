@@ -20,4 +20,14 @@ class EpisodesControllerTest < ActionDispatch::IntegrationTest
     assert_response :see_other
     assert_redirected_to login_url
   end
+
+  test "投稿者でないユーザーの削除リクエストに対してのテスト" do
+    log_in_as(users(:michael))
+    episode = episodes(:ants)
+    assert_no_difference 'Episode.count' do
+      delete episode_path(episode)
+    end
+    assert_response :see_other
+    assert_redirected_to root_url
+  end
 end

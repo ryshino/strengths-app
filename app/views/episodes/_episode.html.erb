@@ -3,5 +3,9 @@
   <span class="content"><%= episode.content %></span>
   <span class="timestamp">
     Posted <%= time_ago_in_words(episode.created_at) %> ago.
+    <% if current_user?(episode.user) %>
+      <%= link_to "削除", episode, data: { "turbo-method": :delete,
+                                               turbo_confirm: "投稿を削除します" } %>
+    <% end %>
   </span>
 </li>
