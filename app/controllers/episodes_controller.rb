@@ -4,6 +4,7 @@ class EpisodesController < ApplicationController
 
   def create
     @episode = current_user.episodes.build(episode_params)
+    @episode.image.attach(params[:episode][:image])
     if @episode.save
       flash[:success] = "エピソードを投稿しました"
       redirect_to root_url
@@ -23,7 +24,7 @@ class EpisodesController < ApplicationController
   private
 
     def episode_params
-      params.require(:episode).permit(:content)
+      params.require(:episode).permit(:content, :image)
     end
 
     def correct_user
