@@ -1,5 +1,16 @@
 class User < ApplicationRecord
   has_many :episodes, dependent: :destroy
+  has_many :active_relationships, class_name:  "Relationship",
+                                  foreign_key: "follower_id",
+                                  dependent:   :destroy
+  has_many :passive_relationships, class_name:  "Relationship",
+                                  foreign_key: "followed_id",
+                                  dependent:   :destroy
+  # source: によってfollowedをfollowingとして扱えるようになる
+  has_many :following, through: :active_relationships, source: :followed
+  # 「followers」の単数形「follower」で自動的に外部キーfollower_idを探索するため、
+  # sourceがなくても良い
+  has_many :followers, through: :passive_relationships, source: :follower
   validates :name,  presence: true, length: { maximum: 50 }
   validates :profile, presence: true, uniqueness: true
   validate :check_profile
@@ -61,4 +72,19 @@ class User < ApplicationRecord
   def feed
     Episode.where("user_id = ?", id)
   end
+
+  # ユーザーをフォローする
+  def follow(other_user)
+    following << other_user unless self == other_user
+  end
+
+  # ユーザーをフォロー解除する
+  def unfollow(other_user)
+    following.delete(other_user)
+  end
+
+  # 現在のユーザーが他のユーザーをフォローしていればtrueを返す
+  def following?(other_user)
+    following.include?(other_user)
+  end  
 end
