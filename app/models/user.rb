@@ -69,12 +69,9 @@ class User < ApplicationRecord
 
   # フォローされているユーザーか、現在のユーザーに対応するuser_idを持つ
   # エピソードを返す
+  # https://rakuda3desu.net/rakudas-rails-tutorial14-3/
   def feed
-    following_ids = "SELECT followed_id FROM relationships
-                    WHERE  follower_id = :user_id"
-    Episode.where("user_id IN (#{following_ids})
-                  OR user_id = :user_id", user_id: id)  
-           .includes(:user, image_attachment: :blob)
+    Episode.where(user: following).or(Episode.where(user_id: id))
   end
 
   # ユーザーをフォローする

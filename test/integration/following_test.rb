@@ -31,6 +31,15 @@ class FollowPagesTest < Following
       assert_select "a[href=?]", user_path(user)
     end
   end
+
+  test "episode.contentをエスケープして、投稿が表示されることをテスト" do
+    get root_path
+    @user.feed.paginate(page: 1).each do |episode|
+      # CGI.escapeHTMLを使用しているのは、
+      # エスケープしないと改行文字や記号が特殊文字で出力されるため。
+      assert_match CGI.escapeHTML(episode.content), response.body
+    end
+  end
 end
 
 class FollowTest < Following
