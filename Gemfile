@@ -49,7 +49,7 @@ gem "sassc-rails"
 # gem "image_processing", "~> 1.2"
 
 group :development, :test do
-  gem "sqlite3", "1.4.2"
+  gem "sqlite3"
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
 end
@@ -78,7 +78,8 @@ group :test do
 end
 
 group :production do
-  gem "pg", "1.3.5"
+  gem "pg"
+  gem 'dotenv-rails'
 end
 
 gem "bootstrap-sass"

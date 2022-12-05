@@ -296,14 +296,14 @@ DEPENDENCIES
   jbuilder
   minitest
   minitest-reporters
-  pg (= 1.3.5)
+  pg
   puma (~> 5.0)
   rails (~> 7.0.3)
   rails-controller-testing
   sassc-rails
   selenium-webdriver
   sprockets-rails
-  sqlite3 (= 1.4.2)
+  sqlite3
   stimulus-rails
   turbo-rails
   tzinfo-data
