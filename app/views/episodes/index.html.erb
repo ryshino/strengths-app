@@ -1,0 +1,14 @@
+<% provide(:title, 'All Episodes') %>
+<h1>エピソード一覧</h1>
+    
+<section class="episode_form">
+  <%= render 'shared/episode_form' %>
+</section>
+
+<%= will_paginate %>
+
+<ul class="episodes">
+  <%= render @episodes %>
+</ul>
+
+<%= will_paginate %>
