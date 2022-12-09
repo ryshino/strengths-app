@@ -1,13 +1,18 @@
 class EpisodesController < ApplicationController
-  before_action :logged_in_user, only: [:create, :destroy]
+  before_action :logged_in_user, only: [:index, :create, :destroy]
   before_action :correct_user,   only: :destroy
+
+  def index
+    @episodes = Episode.paginate(page: params[:page])
+    @episode  = current_user.episodes.build
+  end
 
   def create
     @episode = current_user.episodes.build(episode_params)
     @episode.image.attach(params[:episode][:image])
     if @episode.save
       flash[:success] = "エピソードを投稿しました"
-      redirect_to root_url
+      redirect_to episodes_path
     else
       @feed_items = current_user.feed.paginate(page: params[:page])
       render 'static_pages/home', status: :unprocessable_entity

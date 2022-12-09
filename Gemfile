@@ -81,7 +81,7 @@ group :production do
   gem "pg"
 end
 
-  gem 'dotenv-rails'
+gem 'dotenv-rails'
 
 gem "bootstrap-sass"
 gem "faker"

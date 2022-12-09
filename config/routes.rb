@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     end
   end
   resources :users
-  resources :episodes,      only: [:create, :destroy]
+  resources :episodes,      only: [:index, :create, :destroy]
   resources :relationships, only: [:create, :destroy]
   get '/episodes', to: 'static_pages#home'
 end
