@@ -11,6 +11,15 @@ class User < ApplicationRecord
   # 「followers」の単数形「follower」で自動的に外部キーfollower_idを探索するため、
   # sourceがなくても良い
   has_many :followers, through: :passive_relationships, source: :follower
+
+  has_one_attached :profile_icon do |attachable|
+    attachable.variant :display, resize_to_limit: [500, 500]
+  end
+  validates :profile_icon,   content_type: { in: %w[image/jpeg image/gif image/png],
+                                      message: "無効な画像形式です" },
+                      size:         { less_than: 5.megabytes,
+                                      message:   "ファイルサイズが5MB以上あるため投稿できません" }
+  
   validates :name,  presence: true, length: { maximum: 50 }
   validates :profile, presence: true, uniqueness: true
   validate :check_profile

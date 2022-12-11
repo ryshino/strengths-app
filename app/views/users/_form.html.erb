@@ -1,17 +1,21 @@
 <%= form_with(model: @user) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
 
-  <%= f.label :name %>
+  <%= f.label :name, "リベ名" %>
   <%= f.text_field :name, class: 'form-control' %>
 
-  <%= f.label :profile %>
+  <%= f.label :profile, "プロフィールURL" %>
   <%= f.text_field :profile, class: 'form-control' %>
 
-  <%= f.label :password %>
+  <%= f.label :password, "パスワード" %>
   <%= f.password_field :password, class: 'form-control' %>
 
-  <%= f.label :password_confirmation %>
+  <%= f.label :password_confirmation, "確認用" %>
   <%= f.password_field :password_confirmation, class: 'form-control' %>
 
+  <%= f.label :profile_icon, "プロフィールアイコン" %>
+  <span class="image">
+    <%= f.file_field :profile_icon, accept: "image/jpeg,image/gif,image/png" %>
+  </span>
   <%= f.submit yield(:button_text), class: "btn btn-primary" %>
 <% end %>

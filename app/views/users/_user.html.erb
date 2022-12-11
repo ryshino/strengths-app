@@ -1,4 +1,7 @@
 <li>
+  <% if user.profile_icon.attached? %>
+    <%= image_tag user.profile_icon.variant(:display) %>
+  <% end %>
   <%= link_to user.name, user %>
   <% if current_user.admin? && !current_user?(user) %>
   | <%= link_to "削除", user, data: { "turbo-method": :delete,

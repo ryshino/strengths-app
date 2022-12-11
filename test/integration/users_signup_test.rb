@@ -19,15 +19,18 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
   end
 
   test "有効なユーザー登録に対するテスト" do
+    img  = fixture_file_upload('kitten.jpg', 'image/jpeg')
     assert_difference 'User.count', 1 do
       post users_path, params: { user: { name:  "テスト",
                                          profile: "https://libecity.com/user_profile/test",
                                          password:              "password",
-                                         password_confirmation: "password" } }
+                                         password_confirmation: "password",
+                                         profile_icon: img } }
     end
     follow_redirect!
     assert_template 'users/show'
     assert_not flash.empty?
     assert is_logged_in?
+    assert assigns[:user].image.attached?
   end
 end

@@ -1,4 +1,7 @@
 <li id="episode-<%= episode.id %>">
+  <% if episode.user.profile_icon.attached? %>
+    <%= image_tag episode.user.profile_icon.variant(:display) %>
+  <% end %>
   <span class="user"><%= link_to episode.user.name, episode.user %></span>
   <span class="content">
     <%= episode.content %>
