@@ -19,6 +19,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user.profile_image.attach(params[:user][:profile_icon])
     if @user.save
       reset_session
       log_in @user
@@ -67,7 +68,7 @@ class UsersController < ApplicationController
       # adminを含んでいないのは任意のユーザーが
       # 自分自身にアプリケーションの管理者権限を与えることを防止するため
       params.require(:user).permit(:name, :profile, :password,
-                                  :password_confirmation)
+                                  :password_confirmation, :profile_icon)
     end
     
     # beforeフィルタ
