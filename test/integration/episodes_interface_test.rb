@@ -27,7 +27,7 @@ class EpisodesInterfaceTest < EpisodesInterface
     assert_difference 'Episode.count', 1 do
       post episodes_path, params: { episode: { content: content } }
     end
-    assert_redirected_to root_url
+    assert_redirected_to episodes_path
     follow_redirect!
     # 投稿したエピソードが存在するか確認している
     assert_match content, response.body
