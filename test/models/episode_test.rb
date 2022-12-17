@@ -22,7 +22,7 @@ class EpisodeTest < ActiveSupport::TestCase
   end
 
   test "エピソードの文字制限に対するテスト(文字制限は変更の予定)" do
-    @episode.content = "a" * 141
+    @episode.content = "a" * 1001
     assert_not @episode.valid?
   end
 
