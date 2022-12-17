@@ -4,8 +4,9 @@
   <% end %>
   <span class="user"><%= link_to episode.user.name, episode.user %></span>
   <span class="content">
-    <%# hによってsimple_formatにエスケープ機能を付与できる %>
-    <%= simple_format(h(episode.content)) %>
+    <%# ↓はヘルパーメソッドに定義している %>
+    <%=  html_safe_newline(episode.content) %>
+    <%#= episode.content %>
     <% if episode.image.attached? %>
       <%# リサイズ済みのdisplay_imageを使う %>
       <%= image_tag episode.image.variant(:display) %>
