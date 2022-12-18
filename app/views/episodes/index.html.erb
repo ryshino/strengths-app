@@ -2,13 +2,18 @@
 <h1>エピソード一覧</h1>
     
 <section class="episode_form">
-  <%= render 'shared/episode_form' %>
+  <%= form_tag({controller:"episodes",action:"index"}, method: :get) do %>
+      <% Tag.all.each do |t| %>
+          <li><%= check_box :tag_ids, t.name %><%= t.name %></li>
+      <% end %>
+      <%= submit_tag '検索' %>
+  <% end %>
 </section>
 
-<%= will_paginate %>
+<%= will_paginate unless @episodes.empty? %>
 
 <ul class="episodes">
   <%= render @episodes %>
 </ul>
 
-<%= will_paginate %>
+<%= will_paginate unless @episodes.empty? %>

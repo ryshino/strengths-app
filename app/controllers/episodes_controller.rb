@@ -5,6 +5,25 @@ class EpisodesController < ApplicationController
   def index
     @episodes = Episode.paginate(page: params[:page])
     @episode  = current_user.episodes.build
+
+    # AND検索
+    if params[:tag_ids]
+      @episodes = []
+      params[:tag_ids].each do |key, value|
+        if value == "1"
+          # タグに紐づく投稿を代入
+          tag_episodes = Tag.find_by(name: key).episodes
+          # @episodesが空の場合、tag_articlesを代入
+          # 空でない場合、@episodesとtag_episodesの値を代入する
+          @episodes = @episodes.empty? ? tag_episodes : @episodes & tag_episodes
+        end
+      end
+      if @episodes.empty?
+        @episodes
+      else
+        @episodes = @episodes.paginate(page: params[:page])
+      end
+    end
   end
 
   def create
