@@ -1,5 +1,6 @@
 class TagRelation < ApplicationRecord
-  belongs_to :user
+  # 一旦タグとエピソードだけの関連付けにして実装する
+  # belongs_to :user
   belongs_to :episode
   belongs_to :tag
 end

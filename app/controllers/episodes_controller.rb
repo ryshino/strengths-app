@@ -29,7 +29,7 @@ class EpisodesController < ApplicationController
   private
 
     def episode_params
-      params.require(:episode).permit(:content, :image)
+      params.require(:episode).permit(:content, :image, tag_ids: [])
     end
 
     def correct_user
