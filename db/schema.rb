@@ -59,13 +59,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_17_084146) do
   end
 
   create_table "tag_relations", force: :cascade do |t|
+    t.integer "user_id", null: false
     t.integer "episode_id", null: false
     t.integer "tag_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["episode_id", "tag_id"], name: "index_tag_relations_on_episode_id_and_tag_id", unique: true
     t.index ["episode_id"], name: "index_tag_relations_on_episode_id"
     t.index ["tag_id"], name: "index_tag_relations_on_tag_id"
+    t.index ["user_id", "episode_id", "tag_id"], name: "index_tag_relations_on_user_id_and_episode_id_and_tag_id", unique: true
+    t.index ["user_id"], name: "index_tag_relations_on_user_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -90,4 +92,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_17_084146) do
   add_foreign_key "episodes", "users"
   add_foreign_key "tag_relations", "episodes"
   add_foreign_key "tag_relations", "tags"
+  add_foreign_key "tag_relations", "users"
 end

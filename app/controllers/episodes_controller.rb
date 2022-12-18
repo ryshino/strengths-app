@@ -29,6 +29,8 @@ class EpisodesController < ApplicationController
   def create
     @episode = current_user.episodes.build(episode_params)
     @episode.image.attach(params[:episode][:image])
+    debugger
+    # @episode.tag_relations.episode_id = @episode.id
     if @episode.save
       flash[:success] = "エピソードを投稿しました"
       redirect_to episodes_path

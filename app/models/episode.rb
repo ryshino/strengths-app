@@ -2,7 +2,6 @@ class Episode < ApplicationRecord
   belongs_to :user
 
   has_many :tag_relations, dependent: :destroy
-  # 一旦タグとエピソードだけの関連付けにして実装する
   # has_many :tag_users, through: :tag_relations, source: :user, dependent: :destroy
   has_many :tags, through: :tag_relations, dependent: :destroy
   
