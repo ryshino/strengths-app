@@ -1,0 +1,4 @@
+<% 34.times do |n| %>
+tag_<%= n %>:
+  name: <%= n %>
+<% end %>
