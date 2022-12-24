@@ -29,8 +29,12 @@ class EpisodesController < ApplicationController
   def create
     @episode = current_user.episodes.build(episode_params)
     @episode.image.attach(params[:episode][:image])
-    debugger
-    # @episode.tag_relations.episode_id = @episode.id
+    @tag_ids = params[:episode][:tag_ids]
+    @tag_ids = @tag_ids.to_i
+    @tag_ids.each do |tag_id|
+      debugger
+      @tag_relation = @episode.tag_relations.build(tag_id: tag_id, user_id: current_user.id)
+    end
     if @episode.save
       flash[:success] = "エピソードを投稿しました"
       redirect_to episodes_path
@@ -50,7 +54,11 @@ class EpisodesController < ApplicationController
   private
 
     def episode_params
-      params.require(:episode).permit(:content, :image, tag_ids: [])
+      params.require(:episode).permit(:content, :image)
+    end
+
+    def tag_params
+      params.require(:episode).permit(tag_ids: [])
     end
 
     def correct_user
