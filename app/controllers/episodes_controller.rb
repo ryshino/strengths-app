@@ -30,11 +30,10 @@ class EpisodesController < ApplicationController
     @episode = current_user.episodes.build(episode_params)
     @episode.image.attach(params[:episode][:image])
     @tag_ids = params[:episode][:tag_ids]
-    @tag_ids = @tag_ids.to_i
     @tag_ids.each do |tag_id|
-      debugger
       @tag_relation = @episode.tag_relations.build(tag_id: tag_id, user_id: current_user.id)
     end
+    @episode.tag_relations.first.delete
     if @episode.save
       flash[:success] = "エピソードを投稿しました"
       redirect_to episodes_path
