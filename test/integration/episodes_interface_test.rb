@@ -3,6 +3,7 @@ require "test_helper"
 class EpisodesInterface < ActionDispatch::IntegrationTest
   def setup
     @user = users(:michael)
+    @tag = tags(:tag_1)
     log_in_as(@user)
   end
 end
@@ -16,7 +17,7 @@ class EpisodesInterfaceTest < EpisodesInterface
 
   test "エラーを表示し、無効な送信に対してエピソードを作成しているかテスト" do
     assert_no_difference 'Episode.count' do
-      post episodes_path, params: { episode: { content: "" } }
+      post episodes_path, params: { episode: { content: "", tag_ids: [@tag.id] } }
     end
     assert_select 'div#error_explanation'
     assert_select 'a[href=?]', '/?page=2'  # 正しいページネーションリンク
@@ -25,7 +26,7 @@ class EpisodesInterfaceTest < EpisodesInterface
   test "エピソードが作成されているかテスト" do
     content = "This episode really ties the room together"
     assert_difference 'Episode.count', 1 do
-      post episodes_path, params: { episode: { content: content } }
+      post episodes_path, params: { episode: { content: content, tag_ids: [@tag.id] } }
     end
     assert_redirected_to episodes_path
     follow_redirect!
@@ -82,7 +83,7 @@ class ImageUploadTest < EpisodesInterface
   test "投稿に成功した時に画像が表示されているかテスト" do
     cont = "This episode really ties the room together."
     img  = fixture_file_upload('kitten.jpg', 'image/jpeg')
-    post episodes_path, params: { episode: { content: cont, image: img } }
+    post episodes_path, params: { episode: { content: cont, image: img, tag_ids: [@tag.id] } }
     assert assigns[:episode].image.attached?
   end
 end
