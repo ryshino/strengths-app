@@ -5,8 +5,7 @@
       <% if @user.profile_icon.attached? %>
         <%= image_tag @user.profile_icon.variant(:display) %>
       <% end %>
-      <h1><%= @user.name %></h1>
-      <span><%= link_to "ユーザー詳細画面", @user %></span>
+      <h1><%= link_to "#{@user.name}", @user %></h1>
       <span><strong>Episodes:</strong> <%= @user.episodes.count %></span>
     </section>
     <section class="stats">
