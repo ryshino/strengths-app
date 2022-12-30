@@ -1,5 +1,5 @@
 class EpisodesController < ApplicationController
-  before_action :logged_in_user, only: [:index, :create, :destroy]
+  before_action :logged_in_user, only: [:index, :create, :destroy, :show]
   before_action :correct_user,   only: :destroy
 
   def index
@@ -24,6 +24,10 @@ class EpisodesController < ApplicationController
         @episodes = @episodes.paginate(page: params[:page])
       end
     end
+  end
+
+  def show
+    @episode = Episode.find(params[:id])
   end
 
   def create
