@@ -34,7 +34,7 @@ class EpisodesController < ApplicationController
     @episode = current_user.episodes.build(episode_params)
     @episode.image.attach(params[:episode][:image])
     @tag_ids = params[:episode][:tag_ids]
-    # 空文字を除いてeach文を回している
+    # 空文字を.除いてeach文を回している
     @tag_ids.reject { |id| id.blank? }.each do |tag_id|
       @tag_relation = @episode.tag_relations.build(tag_id: tag_id, user_id: current_user.id)
     end
