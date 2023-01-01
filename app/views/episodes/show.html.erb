@@ -11,16 +11,18 @@
   <h4><%= tag.name %></h4>
 <% end %>
 
-<%= form_with model: @episode, url: tag_path do |f| %>
+<%= form_with model: @tag_relation do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
 
+  <%= f.hidden_field :episode_id, value: @episode.id %>
+
   <div class='form-group'>
-    <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
+    <%= f.collection_check_boxes(:tag_id, Tag.all, :id, :name) do |tag| %>
         <div class='form-check'>
-            <%= tag.label class: 'form-check-label' do %>
-                <%= tag.check_box class: 'form-check-input' %>
+            <%#= tag.label class: 'form-check-label' do %>
+                <%= tag.check_box %>
                 <%= tag.text %>
-            <% end %>
+            <%# end %>
         </div>
     <% end %>
   </div>
