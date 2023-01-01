@@ -1,8 +1,8 @@
 class TagRelationsController < ApplicationController
 
   def create
-    @episode = Episode.find(params[:tag_relation][:episode_id])
-    @tag_ids = params[:tag_relation][:tag_id]
+    @episode = Episode.find(params[:user][:episode_id])
+    @tag_ids = params[:user][:tag_ids]
     # 空文字を除いてeach文を回している
     current_user.tag_relations.delete_all
     @tag_ids.reject { |id| id.blank? }.each do |tag_id|
@@ -15,6 +15,6 @@ class TagRelationsController < ApplicationController
   private
     
     def tag_params
-      params.require(:tag_relation).permit(:episode_id, tag_id: [])
+      params.require(:user).permit(:episode_id, tag_ids: [])
     end
 end
