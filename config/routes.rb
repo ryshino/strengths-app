@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   resources :users
   resources :episodes
   resources :relationships, only: [:create, :destroy]
-  resources :tag_relations, only: [:create]
+  post "/tag_relations", to: "tag_relations#create"
   patch "/tag_relations", to: "tag_relations#create"
   get '/episodes', to: 'static_pages#home'
 end
