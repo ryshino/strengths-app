@@ -8,22 +8,43 @@ class EpisodesController < ApplicationController
 
     # AND検索
     if params[:tag_ids]
-      @episodes = []
-      params[:tag_ids].each do |key, value|
-        if value == "1"
-          # タグに紐づく投稿を代入
-          tag_episodes = Tag.find_by(name: key).episodes
-          # @episodesが空の場合、tag_articlesを代入
-          # 空でない場合、@episodesとtag_episodesの値を代入する
-          @episodes = @episodes.empty? ? tag_episodes : @episodes & tag_episodes
-        end
+      @tag_episodes = []
+      params[:tag_ids].select { |k, v| v == "1" }.each do |key, value|
+        # タグに紐づく投稿を代入
+        tags = Tag.find_by(name: key).episodes
+        # @episodesが空の場合、tag_articlesを代入
+        # 空でない場合、@episodesとtag_episodesの値を代入する
+        @tag_episodes = @tag_episodes.empty? ? tags : @tag_episodes & tags
       end
-      if @episodes.empty?
-        @episodes
+      
+      if @tag_episodes.empty?
+        @episodes = @tag_episodes
       else
+        # @tag_episodesはArrayクラスのため、paginateの部分でエラーになる
+        # そのためwhereを使ってActiveRecord_Relationを
+        # 継承させている
+        @episodes = Episode
+        @tag_episodes.each do |episode|
+          @episodes = @episodes.where("id LIKE ?", episode.id)
+        end
         @episodes = @episodes.paginate(page: params[:page])
       end
     end
+
+    # if params[:tag_ids]
+    #   # タグづけされているエピソードのみを抽出
+    #   # debugger
+    #   @episodes = TagRelation.joins(:episode, :tag).select("episodes.*, tags.*")
+    #   params[:tag_ids].select { |k, v| v == "1" }.each do |key, value|
+    #     @episodes = @episodes.where("name LIKE ?", "%#{key}")
+    #   end
+
+    #   if @episodes.empty?
+    #     @episodes
+    #   else
+    #     @episodes = @episodes.paginate(page: params[:page])
+    #   end
+    # end
   end
 
   def show
