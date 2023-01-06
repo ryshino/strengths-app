@@ -1,55 +1,19 @@
 class EpisodesController < ApplicationController
   before_action :logged_in_user, only: [:index, :create, :destroy, :show]
   before_action :correct_user,   only: :destroy
+  before_action :set_q, only: [:index]
 
   def index
-    @episodes = Episode.paginate(page: params[:page])
+    @episodes = @q.result.paginate(page: params[:page])
     @episode  = current_user.episodes.build
-
-    # AND検索
-    if params[:tag_ids]
-      @tag_episodes = []
-      params[:tag_ids].select { |k, v| v == "1" }.each do |key, value|
-        # タグに紐づく投稿を代入
-        tags = Tag.find_by(name: key).episodes
-        # @episodesが空の場合、tag_articlesを代入
-        # 空でない場合、@episodesとtag_episodesの値を代入する
-        @tag_episodes = @tag_episodes.empty? ? tags : @tag_episodes & tags
-      end
-      
-      if @tag_episodes.empty?
-        @episodes = @tag_episodes
-      else
-        # @tag_episodesはArrayクラスのため、paginateの部分でエラーになる
-        # そのためwhereを使ってActiveRecord_Relationを
-        # 継承させている
-        @episodes = Episode
-        @tag_episodes.each do |episode|
-          @episodes = @episodes.where("id LIKE ?", episode.id)
-        end
-        @episodes = @episodes.paginate(page: params[:page])
-      end
+    if @episodes.blank?
+      flash.now[:success] = "該当のエピソードは見つかりませんでした。"
     end
-
-    # if params[:tag_ids]
-    #   # タグづけされているエピソードのみを抽出
-    #   # debugger
-    #   @episodes = TagRelation.joins(:episode, :tag).select("episodes.*, tags.*")
-    #   params[:tag_ids].select { |k, v| v == "1" }.each do |key, value|
-    #     @episodes = @episodes.where("name LIKE ?", "%#{key}")
-    #   end
-
-    #   if @episodes.empty?
-    #     @episodes
-    #   else
-    #     @episodes = @episodes.paginate(page: params[:page])
-    #   end
-    # end
   end
 
   def show
     @episode = Episode.find(params[:id])
-    @user = current_user
+    @tag_relation = TagRelation.new
   end
 
   def create
@@ -77,6 +41,10 @@ class EpisodesController < ApplicationController
   end
 
   private
+
+    def set_q
+      @q = Episode.ransack(params[:q])
+    end
 
     def episode_params
       params.require(:episode).permit(:content, :image)

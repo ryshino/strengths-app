@@ -11,13 +11,13 @@
   <h4><%= tag.name %></h4>
 <% end %>
 
-<%= form_with model: @user, url: tag_relations_path do |f| %>
+<%= form_with model: @tag_relation, url: tag_relations_path do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
 
   <%= f.hidden_field :episode_id, value: @episode.id %>
 
   <div class='form-group'>
-    <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
+    <%= f.collection_check_boxes(:tag_id, Tag.all, :id, :name, {include_hidden: false}) do |tag| %>
         <div class='form-check'>
           <%= tag.check_box %>
           <%= tag.text %>
