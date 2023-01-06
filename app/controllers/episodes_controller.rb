@@ -13,7 +13,7 @@ class EpisodesController < ApplicationController
 
   def show
     @episode = Episode.find(params[:id])
-    @user = current_user
+    @tag_relation = TagRelation.new
   end
 
   def create
