@@ -70,7 +70,7 @@ class UserTest < ActiveSupport::TestCase
 
   test "ユーザーを削除した時、それに紐づくエピソードも削除されるかテスト" do
     @user.save
-    @user.episodes.create!(content: "Lorem ipsum")
+    @user.episodes.create!(title: "title", content: "Lorem ipsum")
     assert_difference 'Episode.count', -1 do
       @user.destroy 
     end
