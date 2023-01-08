@@ -1,5 +1,12 @@
 <% provide(:title, 'All users') %>
-<h1>ユーザー一覧（今後ユーザー検索機能を実装したい）</h1>
+<h1>ユーザー一覧</h1>
+
+  <%= search_form_for @q do |f| %>
+    <%= f.label :name_cont, 'ユーザー検索' %>
+    <%= f.search_field :name_cont %>
+    <%= f.submit '検索' %>
+    <%= link_to "リセット", users_path, class: "btn btn-outline-secondary" %>
+  <% end %>
 
 <%= will_paginate %>
 

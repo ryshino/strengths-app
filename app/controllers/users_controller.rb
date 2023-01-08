@@ -3,9 +3,13 @@ class UsersController < ApplicationController
                                         :following, :followers]
   before_action :correct_user,   only: [:edit, :update]
   before_action :admin_user,     only: :destroy
+  before_action :set_q, only: [:index]
 
   def index
-    @users = User.paginate(page: params[:page])
+    @users = @q.result.paginate(page: params[:page])
+    if @users.blank?
+      flash.now[:success] = "該当のユーザーは見つかりませんでした。"
+    end
   end
 
   def show
@@ -63,7 +67,11 @@ class UsersController < ApplicationController
   end
 
   private
-
+  
+    def set_q
+      @q = User.ransack(params[:q])
+    end
+    
     def user_params
       # adminを含んでいないのは任意のユーザーが
       # 自分自身にアプリケーションの管理者権限を与えることを防止するため
