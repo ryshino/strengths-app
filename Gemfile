@@ -89,6 +89,7 @@ gem 'pry-rails'
 
 gem "bootstrap-sass"
 gem "faker"
+gem 'gimei'
 
 gem "will_paginate"
 gem "bootstrap-will_paginate"
