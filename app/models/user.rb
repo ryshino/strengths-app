@@ -24,7 +24,7 @@ class User < ApplicationRecord
                       size:         { less_than: 5.megabytes,
                                       message:   "ファイルサイズが5MB以上あるため投稿できません" }
   
-  validates :name,  presence: true, length: { maximum: 50 }
+  validates :name,  presence: true, length: { maximum: 20 }
   validates :profile, presence: true, uniqueness: true
   validate :check_profile
   #:allow_nilオプションは、対象の値がnilの場合にバリデーションをスキップする
