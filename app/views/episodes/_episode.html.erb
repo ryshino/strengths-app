@@ -11,12 +11,7 @@
     <br>
     <%# ↓はヘルパーメソッドに定義している %>
     <%=  html_safe_newline(episode.content) %>
-
-    <% if episode.image.attached? %>
-      <%# リサイズ済みのdisplay_imageを使う %>
-      <%= image_tag episode.image.variant(:display) %>
-    <% end %>
-
+    
   </span>
   <% episode.tags.each do |tag| %>
     <span><%= tag.name %></span>

@@ -18,7 +18,6 @@ class EpisodesController < ApplicationController
 
   def create
     @episode = current_user.episodes.build(episode_params)
-    @episode.image.attach(params[:episode][:image])
     @tag_ids = params[:episode][:tag_ids]
     # 空文字を除いてeach文を回している
     @tag_ids.reject { |id| id.blank? }.each do |tag_id|
@@ -47,7 +46,7 @@ class EpisodesController < ApplicationController
     end
 
     def episode_params
-      params.require(:episode).permit(:title, :content, :image)
+      params.require(:episode).permit(:title, :content)
     end
 
     def tag_params

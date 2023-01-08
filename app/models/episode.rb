@@ -12,8 +12,4 @@ class Episode < ApplicationRecord
   validates :title, :user_id, presence: true
   # 文字制限は変更の予定
   validates :content, presence: true, length: { maximum: 1000 }
-  validates :image,   content_type: { in: %w[image/jpeg image/gif image/png],
-                                      message: "無効な画像形式です" },
-                      size:         { less_than: 5.megabytes,
-                                      message:   "ファイルサイズが5MB以上あるため投稿できません" }
 end
