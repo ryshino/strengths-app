@@ -47,7 +47,7 @@ class EpisodesController < ApplicationController
     end
 
     def episode_params
-      params.require(:episode).permit(:content, :image)
+      params.require(:episode).permit(:title, :content, :image)
     end
 
     def tag_params

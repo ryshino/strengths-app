@@ -1,8 +1,11 @@
 <%= form_with(model: @episode) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
-  
   <div class="field">
-    <%= f.text_area :content, placeholder: "Compose new episode..." %>
+    <%= f.text_field :title, placeholder: "タイトルを入力" %>
+  </div>  
+
+  <div class="field">
+    <%= f.text_area :content, placeholder: "エピソードを入力" %>
   </div>
 
   <div class='form-group'>

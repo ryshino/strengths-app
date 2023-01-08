@@ -44,7 +44,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_08_013139) do
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "title"
+    t.string "title", null: false
     t.index ["user_id", "created_at"], name: "index_episodes_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_episodes_on_user_id"
   end
