@@ -18,10 +18,12 @@
 
   <div class='form-group'>
     <%= f.collection_check_boxes(:tag_id, Tag.all, :id, :name, {include_hidden: false}) do |tag| %>
-        <div class='form-check'>
-          <%= tag.check_box %>
+      <%= tag.label do %>
+        <%= tag.check_box class:"btn-check", id:"btn-check#{ tag }", autocomplete:"off" %>
+        <label class="btn btn-primary" for="btn-check<%= tag %>">
           <%= tag.text %>
-        </div>
+        </label>
+      <% end %>
     <% end %>
   </div>
 
