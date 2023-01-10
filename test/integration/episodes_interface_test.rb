@@ -24,14 +24,17 @@ class EpisodesInterfaceTest < EpisodesInterface
   end
 
   test "エピソードが作成されているかテスト" do
+    title = "sample title"
     content = "This episode really ties the room together"
     assert_difference 'Episode.count', 1 do
-      post episodes_path, params: { episode: { content: content, tag_ids: [@tag.id] } }
+      post episodes_path, params: { episode: { title: title, content: content, tag_ids: [@tag.id] } }
     end
     assert_redirected_to episodes_path
     follow_redirect!
     # 投稿したエピソードが存在するか確認している
+    assert_match title, response.body
     assert_match content, response.body
+    assert_match @tag.name, response.body
   end
 
   test "自分の投稿に対して削除リンクがあるかテスト" do
@@ -70,20 +73,5 @@ class EpisodeSidebarTest < EpisodesInterface
     log_in_as(users(:lana))
     get root_path
     assert_match "1 episode", response.body
-  end
-end
-
-class ImageUploadTest < EpisodesInterface
-
-  test "画像の投稿フォームがあるかテスト" do
-    get root_path
-    assert_select 'input[type= file ]'
-  end
-
-  test "投稿に成功した時に画像が表示されているかテスト" do
-    cont = "This episode really ties the room together."
-    img  = fixture_file_upload('kitten.jpg', 'image/jpeg')
-    post episodes_path, params: { episode: { content: cont, image: img, tag_ids: [@tag.id] } }
-    assert assigns[:episode].image.attached?
   end
 end

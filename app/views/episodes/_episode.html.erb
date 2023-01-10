@@ -4,14 +4,14 @@
   <% end %>
   <span class="user"><%= link_to episode.user.name, episode.user %></span>
   <span class="content">
+
     <%= link_to episode_path(episode) do %>
-      <%# ↓はヘルパーメソッドに定義している %>
-      <%=  html_safe_newline(episode.content) %>
+      <%=  episode.title %>
     <% end %>
-    <% if episode.image.attached? %>
-      <%# リサイズ済みのdisplay_imageを使う %>
-      <%= image_tag episode.image.variant(:display) %>
-    <% end %>
+    <br>
+    <%# ↓はヘルパーメソッドに定義している %>
+    <%=  html_safe_newline(episode.content) %>
+    
   </span>
   <% episode.tags.each do |tag| %>
     <span><%= tag.name %></span>

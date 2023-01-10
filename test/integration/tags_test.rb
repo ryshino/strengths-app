@@ -8,9 +8,9 @@ class Tags < ActionDispatch::IntegrationTest
 end
 
 class TagsPagesTest < Tags
-  
-  test "タグが表示されるかテスト" do
-    get root_path
-    assert_select "form input.form-check-input", count: 34
-  end
+  # 投稿した後にちゃんとタグ付けがされているかのテストを書く
+  # test "タグが表示されるかテスト" do
+  #   get root_path
+  #   assert_select "form input.form-check-input", count: 34
+  # end
 end

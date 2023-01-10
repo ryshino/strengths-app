@@ -4,7 +4,7 @@ class EpisodeTest < ActiveSupport::TestCase
 
   def setup
     @user = users(:michael)
-    @episode = @user.episodes.build(content: "テスト")
+    @episode = @user.episodes.build(title: "タイトル", content: "テスト")
   end
 
   test "有効性のテスト" do

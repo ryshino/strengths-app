@@ -5,10 +5,11 @@
   <%= image_tag @episode.user.profile_icon.variant(:display) %>
 <% end %>
 <h3><%= link_to @episode.user.name, @episode.user %></h3>
-<h3><%= @episode.content %></h3>
+<h3><%= @episode.title %></h3>
+<h4><%= @episode.content %></h4>
 
 <% @episode.tags.each do |tag| %>
-  <h4><%= tag.name %></h4>
+  <span class="badge rounded-pill bg-primary"><%= tag.name %><%#= タグの集計した値を表示したい %></span>  
 <% end %>
 
 <%= form_with model: @tag_relation, url: tag_relations_path do |f| %>
@@ -18,10 +19,12 @@
 
   <div class='form-group'>
     <%= f.collection_check_boxes(:tag_id, Tag.all, :id, :name, {include_hidden: false}) do |tag| %>
-        <div class='form-check'>
-          <%= tag.check_box %>
+      <%= tag.label do %>
+        <%= tag.check_box class:"btn-check", id:"btn-check#{ tag }", autocomplete:"off" %>
+        <label class="btn btn-primary" for="btn-check<%= tag %>">
           <%= tag.text %>
-        </div>
+        </label>
+      <% end %>
     <% end %>
   </div>
 

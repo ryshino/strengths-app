@@ -1,19 +1,21 @@
 <% provide(:title, 'All Episodes') %>
 <h1>エピソード一覧</h1>
-    
-
-
-<%# <section class="episode_form"> %>
   <%= search_form_for @q do |f| %>
-    <%= f.label :tags_name_cont, '資質検索' %>
-    <%= f.collection_check_boxes :tags_id_in, Tag.all, :id, :name, {include_hidden: false} %>
-    <br>
     <%= f.label :content_cont, 'エピソード検索' %>
     <%= f.search_field :content_cont %>
+    <br>
+    <%= f.label :tags_id_in, '資質検索' %>
+      <%= f.collection_check_boxes :tags_id_in, Tag.all, :id, :name, {include_hidden: false} do |tag| %>
+          <%= tag.label do %>
+            <%= tag.check_box class:"btn-check", id:"btn-check#{ tag }", autocomplete:"off" %>
+            <label class="btn btn-primary" for="btn-check<%= tag %>">
+              <%= tag.text %>
+            </label>
+          <% end %>
+      <% end %>
     <%= f.submit '検索' %>
     <%= link_to "リセット", episodes_path, class: "btn btn-outline-secondary" %>
   <% end %>
-<%# </section> %>
 
 
 <%= will_paginate unless @episodes.empty? %>
