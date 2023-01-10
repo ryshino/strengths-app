@@ -1,9 +1,9 @@
 class TagRelationsController < ApplicationController
 
   def create
-    @episode = Episode.find(params[:tag_relation][:episode_id])
-    @tag_ids = params[:tag_relation][:tag_id]
-    current_user.tag_relations.where("episode_id LIKE ?", @episode.id).delete_all
+    @episode = Episode.find(tag_params[:episode_id])
+    @tag_ids = tag_params[:tag_id]
+    @tags =  current_user.tag_relations.where(episode: @episode).destroy_all
     unless @tag_ids.nil?
       @tag_ids.each do |tag_id|
         tag_relation = TagRelation.new(tag_id: tag_id, episode_id: @episode.id, user_id: current_user.id)
