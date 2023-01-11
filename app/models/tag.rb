@@ -1,5 +1,8 @@
 class Tag < ApplicationRecord
-  has_many :tag_relations, dependent: :destroy
-  has_many :episodes, through: :tag_relations, dependent: :destroy
-  has_many :users, through: :tag_relations, dependent: :destroy
+  # dependent: :destroy をつけていたが、
+  # タグは削除することを想定していないため
+  # dependent: :destroyの記述を消した
+  has_many :tag_relations
+  has_many :episodes, through: :tag_relations
+  has_many :users, through: :tag_relations
 end
