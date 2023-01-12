@@ -8,8 +8,8 @@
 <h3><%= @episode.title %></h3>
 <h4><%= @episode.content %></h4>
 
-<% @episode.tags.each do |tag| %>
-  <span class="badge rounded-pill bg-primary"><%= tag.name %><%#= タグの集計した値を表示したい %></span>  
+<% @episode_tags.map do |k, v| [k, v] %>
+ <span class="badge rounded-pill bg-primary"><%= k %><%= v %></span> 
 <% end %>
 
 <%= form_with model: @tag_relation, url: tag_relations_path do |f| %>

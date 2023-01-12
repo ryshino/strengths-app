@@ -14,8 +14,10 @@ class EpisodesController < ApplicationController
   def show
     @episode = Episode.find(params[:id])
     @tag_relation = TagRelation.new
+    episode_tags_all = Episode.joins(tag_relations: :tag).group(:episode_id, :name).size
+    episode_tags = episode_tags_all.select { |k| k.slice(0) == @episode.id }
+    @episode_tags = episode_tags.map { |k, v| [k.slice(1), v] }
   end
-
   def create
     @episode = current_user.episodes.build(episode_params)
     @tag_ids = params[:episode][:tag_ids]
