@@ -87,13 +87,12 @@ end
 gem 'dotenv-rails'
 gem 'pry-rails'
 
-gem "bootstrap-sass"
 gem "faker"
 gem 'gimei'
 
 gem "will_paginate"
-gem "bootstrap-will_paginate"
 gem "active_storage_validations"
 gem "image_processing"
 
 gem 'ransack'
+gem "tailwindcss-rails"
