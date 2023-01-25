@@ -12,6 +12,9 @@ Rails.application.routes.draw do
       get :following, :followers
     end
   end
+  namespace :admin do
+    resources :users
+  end
   resources :users
   resources :episodes
   resources :relationships, only: [:create, :destroy]

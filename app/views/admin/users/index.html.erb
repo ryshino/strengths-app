@@ -1,0 +1,17 @@
+<% provide(:title, 'Admin All users') %>
+<h1>【管理者画面】ユーザー一覧</h1>
+
+  <%= search_form_for @q do |f| %>
+    <%= f.label :name_cont, 'ユーザー検索' %>
+    <%= f.search_field :name_cont %>
+    <%= f.submit '検索' %>
+    <%= link_to "リセット", users_path, class: "btn btn-outline-secondary" %>
+  <% end %>
+
+<%= will_paginate %>
+
+<ul class="users">
+  <%= render @users %>
+</ul>
+
+<%= will_paginate %>
