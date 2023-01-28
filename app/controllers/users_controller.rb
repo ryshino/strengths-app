@@ -23,7 +23,8 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user.profile_icon.attach(params[:user][:profile_icon])
+    @user.profile_icon.attach(params[:user][:profile_icon]) if @user.profile_icon.attached?
+    @user.strength_image.attach(params[:user][:strength_image]) if @user.strength_image.attached?
     if @user.save
       reset_session
       log_in @user
@@ -67,18 +68,18 @@ class UsersController < ApplicationController
   end
 
   private
-  
+
     def set_q
       @q = User.ransack(params[:q])
     end
-    
+
     def user_params
       # adminを含んでいないのは任意のユーザーが
       # 自分自身にアプリケーションの管理者権限を与えることを防止するため
       params.require(:user).permit(:name, :profile, :password,
-                                  :password_confirmation, :profile_icon)
+                                  :password_confirmation, :profile_icon, :strength_image)
     end
-    
+
     # beforeフィルタ
 
     # 正しいユーザーかどうか確認

@@ -11,19 +11,18 @@ class User < ApplicationRecord
   # 「followers」の単数形「follower」で自動的に外部キーfollower_idを探索するため、
   # sourceがなくても良い
   has_many :followers, through: :passive_relationships, source: :follower
-  
+
   has_many :tag_relations, dependent: :destroy
   # has_many :tag_episodes, through: :tag_relations, source: :episode, dependent: :destroy
   has_many :tags, through: :tag_relations
 
-  has_one_attached :profile_icon do |attachable|
-    attachable.variant :display, resize_to_limit: [500, 500]
-  end
-  validates :profile_icon,   content_type: { in: %w[image/jpeg image/gif image/png],
-                                      message: "無効な画像形式です" },
-                      size:         { less_than: 5.megabytes,
-                                      message:   "ファイルサイズが5MB以上あるため投稿できません" }
-  
+  has_one_attached :profile_icon
+  has_one_attached :strength_image
+  validates :profile_icon, :strength_image,   content_type: { in: %w[image/jpeg image/gif image/png],
+                                              message: "無効な画像形式です" },
+                                size:         { less_than: 5.megabytes,
+                                              message:   "ファイルサイズが5MB以上あるため投稿できません" }
+
   validates :name,  presence: true, length: { maximum: 20 }
   validates :profile, presence: true, uniqueness: true
   validate :check_profile
@@ -70,7 +69,7 @@ class User < ApplicationRecord
   # 渡されたトークンがダイジェストと一致したらtrueを返す
   def authenticated?(remember_token)
     return false if remember_digest.nil?
-    # remember_digestの暗号化された文字列が 
+    # remember_digestの暗号化された文字列が
     # 検証したい値(remember_token)から暗号化する文字列と一致するかを検証
     BCrypt::Password.new(remember_digest).is_password?(remember_token)
   end
@@ -101,5 +100,5 @@ class User < ApplicationRecord
   # 現在のユーザーが他のユーザーをフォローしていればtrueを返す
   def following?(other_user)
     following.include?(other_user)
-  end  
+  end
 end
