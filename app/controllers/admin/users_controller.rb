@@ -19,7 +19,7 @@ class Admin::UsersController < ApplicationController
     # 管理者かどうか確認
     def admin_user
       unless logged_in? && current_user.admin?
-        redirect_to(root_url, status: :see_other) 
+        redirect_to(root_url, status: :see_other)
         flash[:danger] = "管理者のみアクセスできます"
       end
     end

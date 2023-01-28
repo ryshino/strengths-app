@@ -1,9 +1,9 @@
 <% provide(:title, 'Admin All users') %>
 <h1>【管理者画面】ユーザー一覧</h1>
 
-  <%= search_form_for @q do |f| %>
-    <%= f.label :name_cont, 'ユーザー検索' %>
-    <%= f.search_field :name_cont %>
+  <%= search_form_for @q, url: admin_users_path do |f| %>
+    <%= f.label :name_or_profile_cont, 'ユーザー検索' %>
+    <%= f.search_field :name_or_profile_cont %>
     <%= f.submit '検索' %>
     <%= link_to "リセット", users_path, class: "btn btn-outline-secondary" %>
   <% end %>
