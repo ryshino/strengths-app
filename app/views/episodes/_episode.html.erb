@@ -11,16 +11,15 @@
     <br>
     <%# ↓はヘルパーメソッドに定義している %>
     <%=  html_safe_newline(episode.content) %>
-    
+
   </span>
   <% episode.tags.each do |tag| %>
     <span><%= tag.name %></span>
   <% end %>
   <span class="timestamp">
     Posted <%= time_ago_in_words(episode.created_at) %> ago.
-    <% if current_user?(episode.user) %>
-      <%= link_to "削除", episode, data: { "turbo-method": :delete,
-                                               turbo_confirm: "投稿を削除します" } %>
+    <% if current_user.admin? || current_user?(episode.user) %>
+      <%= link_to "削除", episode, data: { "turbo-method": :delete,turbo_confirm: "投稿を削除します" } %>
     <% end %>
   </span>
 </li>
