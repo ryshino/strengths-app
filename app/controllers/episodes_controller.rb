@@ -11,13 +11,8 @@ class EpisodesController < ApplicationController
     end
   end
 
-  def show
-    @episode = Episode.find(params[:id])
-    @tag_relation = current_user.tag_relations.find_or_initialize_by(episode_id: @episode.id)
-    @current_user_select_tags = current_user.tag_relations.where(episode_id: @episode.id).pluck(:tag_id)
-    search_select_tags = Episode.joins(tag_relations: :tag).group(:episode_id, :name).
-                  having("episode_id == ?", @episode.id).size
-    @episode_tags = search_select_tags.map { |k, v| [k.slice(1), v] }
+  def new
+    @episode = Episode.new
   end
 
   def create
@@ -34,6 +29,15 @@ class EpisodesController < ApplicationController
       @feed_items = current_user.feed.paginate(page: params[:page])
       render 'static_pages/home', status: :unprocessable_entity
     end
+  end
+
+  def show
+    @episode = Episode.find(params[:id])
+    @tag_relation = current_user.tag_relations.find_or_initialize_by(episode_id: @episode.id)
+    @current_user_select_tags = current_user.tag_relations.where(episode_id: @episode.id).pluck(:tag_id)
+    search_select_tags = Episode.joins(tag_relations: :tag).group(:episode_id, :name).
+                  having("episode_id == ?", @episode.id).size
+    @episode_tags = search_select_tags.map { |k, v| [k.slice(1), v] }
   end
 
   def destroy
