@@ -1,7 +1,11 @@
 <li>
-  <% if user.profile_icon.attached? %>
-    <%= image_tag user.profile_icon.variant(:display) %>
-  <% end %>
+  <div class="w-10 rounded-full">
+    <% if user.profile_icon.attached? %>
+      <%= image_tag user.profile_icon %>
+    <% else %>
+      <%= image_tag("no_image.jpg", alt: "no_image") %>
+    <% end %>
+  </div>
   <%= link_to user.name, user %>
   <% if current_user.admin? && !current_user?(user) %>
   | <%= link_to "削除", user, data: { "turbo-method": :delete,

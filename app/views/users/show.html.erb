@@ -3,9 +3,20 @@
   <aside class="col-md-4">
     <section class="user_info">
       <h1>
-        <% if @user.profile_icon.attached? %>
-          <%= image_tag @user.profile_icon.variant(:display) %>
-        <% end %>
+        <div class="w-10 rounded-full">
+          <% if @user.profile_icon.attached? %>
+            <%= image_tag @user.profile_icon %>
+          <% else %>
+            <%= image_tag("no_image.jpg", alt: "no_image") %>
+          <% end %>
+        </div>
+        <div class="w-40 rounded-full">
+          <% if @user.strength_image.attached? %>
+            <%= image_tag @user.strength_image %>
+          <% else %>
+            <%= image_tag("no_image.jpg", alt: "no_image") %>
+          <% end %>
+        </div>
         <%= @user.name %>
       </h1>
     </section>

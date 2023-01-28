@@ -12,8 +12,11 @@
       <div class="dropdown dropdown-end">
         <label tabindex="0" class="btn btn-ghost btn-circle avatar">
           <div class="w-10 rounded-full">
-            <%# ユーザーの画像を挿入する %>
-            <img src="https://placeimg.com/80/80/people" />
+            <% if current_user.profile_icon.attached? %>
+              <%= image_tag current_user.profile_icon %>
+            <% else %>
+              <%= image_tag("no_image.jpg", alt: "no_image") %>
+            <% end %>
           </div>
         </label>
         <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">

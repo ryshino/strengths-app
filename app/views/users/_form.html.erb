@@ -17,5 +17,11 @@
   <span class="image">
     <%= f.file_field :profile_icon, accept: "image/jpeg,image/gif,image/png" %>
   </span>
+
+  <%= f.label :strength_image, "資質一覧の写真" %>
+  <span class="image">
+    <%= f.file_field :strength_image, accept: "image/jpeg,image/gif,image/png" %>
+  </span>
+  
   <%= f.submit yield(:button_text), class: "btn btn-primary" %>
 <% end %>
