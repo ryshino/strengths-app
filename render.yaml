@@ -1,12 +1,12 @@
 databases:
-  - name: strengths-app-DB
-    databaseName: strengths_app_db_v1fm
-    user: strengths_app_db_v1fm_user
+  - name: strengths-app
+    databaseName: strengths_app
+    user: ryshino
     region: singapore
 
 services:
   - type: web
-    name: strengths-app-DB
+    name: strengths-app
     env: ruby
     region: singapore
     buildCommand: "./bin/render-build.sh"
