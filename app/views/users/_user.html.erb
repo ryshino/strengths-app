@@ -1,14 +1,23 @@
-<li>
-  <div class="w-10 rounded-full">
-    <% if user.profile_icon.attached? %>
-      <%= image_tag user.profile_icon %>
-    <% else %>
-      <%= image_tag("no_image.jpg", alt: "no_image") %>
-    <% end %>
+<div class="md:w-1/2 xl:w-1/4 p-4">
+  <div class="card card-side bg-base-100 shadow-xl">
+    <figure class="w-1/2 w-full">
+      <% if user.profile_icon.attached? %>
+        <%= image_tag user.profile_icon %>
+      <% else %>
+        <%= image_tag("no_image.jpg", alt: "no_image") %>
+      <% end %>
+    </figure>
+    <div class="card-body">
+      <h2 class="card-title link link-hover"><%= link_to user.name, user %></h2>
+      <div class="card-actions justify-end">
+        <button class="btn btn-primary">フォロー</button>
+          <% if current_user.admin? && !current_user?(user) %>
+            <button class="btn btn-primary">
+              <%= link_to "削除", user, data: { "turbo-method": :delete,
+                                                                turbo_confirm: "本当に削除しますか？" } %>
+            </button>
+          <% end %>
+      </div>
+    </div>
   </div>
-  <%= link_to user.name, user %>
-  <% if current_user.admin? && !current_user?(user) %>
-  | <%= link_to "削除", user, data: { "turbo-method": :delete,
-                                          turbo_confirm: "本当に削除しますか？" } %>
-  <% end %>
-</li>
+</div>

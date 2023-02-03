@@ -7,11 +7,11 @@
     <%= f.submit '検索' %>
     <%= link_to "リセット", users_path, class: "btn btn-outline-secondary" %>
   <% end %>
-
-<%= will_paginate %>
-
-<ul class="users">
-  <%= render @users %>
-</ul>
-
-<%= will_paginate %>
+  
+<section class="text-gray-600">
+  <div class="container px-4 py-24 mx-auto">
+    <div class="flex flex-wrap -m-4">
+      <%= render @users %>
+    </div>
+  </div>
+</section>
