@@ -1,27 +1,24 @@
 <% provide(:title, 'All Episodes') %>
-<h1>エピソード一覧</h1>
-  <%= search_form_for @q do |f| %>
-    <%= f.label :content_cont, 'エピソード検索' %>
-    <%= f.search_field :content_cont %>
-    <br>
-    <%= f.label :tags_id_in, '資質検索' %>
-      <%= f.collection_check_boxes :tags_id_in, Tag.all, :id, :name, {include_hidden: false} do |tag| %>
-          <%= tag.label do %>
-            <%= tag.check_box class:"btn-check", id:"btn-check#{ tag }", autocomplete:"off" %>
-            <label class="btn btn-primary" for="btn-check<%= tag %>">
-              <%= tag.text %>
-            </label>
-          <% end %>
-      <% end %>
-    <%= f.submit '検索' %>
-    <%= link_to "リセット", episodes_path, class: "btn btn-outline-secondary" %>
-  <% end %>
-
-
-<%= will_paginate unless @episodes.empty? %>
-
-<ul class="episodes">
-  <%= render @episodes %>
-</ul>
-
-<%= will_paginate unless @episodes.empty? %>
+<section class="text-gray-600">
+  <div class="container p-8 mx-auto">
+    <div class="flex flex-wrap w-full mb-20">
+      <div class="lg:w-1/2 w-full mb-6 lg:mb-0">
+        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">エピソード一覧</h1>
+      </div>
+      <div class="lg:w-1/2 mb-6 lg:mb-0">
+        <%= search_form_for @q do |f| %>
+        <div class="form-control">
+          <div class="input-group flex">
+            <%= f.search_field :content_cont, placeholder: "検索キーワードを入力", class:"w-10/12" %>
+            <%= f.submit '検索', class:"btn btn-square  md:w-2/12" %>
+          </div>
+          <%= link_to "リセット", episodes_path, class: "btn btn-square w-1/2 lg:w-2/12 my-4" %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="flex flex-wrap -m-4">
+      <%= render @episodes %>
+    </div>
+  </div>
+</section>
