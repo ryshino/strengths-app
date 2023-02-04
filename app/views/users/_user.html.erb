@@ -12,9 +12,8 @@
       <div class="card-actions justify-end">
         <button class="btn btn-primary">フォロー</button>
           <% if current_user.admin? && !current_user?(user) %>
-            <button class="btn btn-primary">
-              <%= link_to "削除", user, data: { "turbo-method": :delete,
-                                                                turbo_confirm: "本当に削除しますか？" } %>
+            <%= link_to "削除", user, data: { "turbo-method": :delete,
+                                                              turbo_confirm: "本当に削除しますか？" }, class:"btn btn-primary" %>
             </button>
           <% end %>
       </div>
