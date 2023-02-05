@@ -2,14 +2,14 @@
 <h1>エピソード詳細画面</h1>
 
 <% if @episode.user.profile_icon.attached? %>
-  <%= image_tag @episode.user.profile_icon.variant(:display) %>
+  <%= image_tag @episode.user.profile_icon %>
 <% end %>
 <h3><%= link_to @episode.user.name, @episode.user %></h3>
 <h3><%= @episode.title %></h3>
 <h4><%= @episode.content %></h4>
 
 <% @episode_tags.map do |k, v| [k, v] %>
- <span class="badge rounded-pill bg-primary"><%= k %><%= v %></span> 
+  <span class="badge rounded-pill bg-primary"><%= k %><%= v %></span> 
 <% end %>
 
 <%= form_with model: @tag_relation, url: tag_relations_path do |f| %>
