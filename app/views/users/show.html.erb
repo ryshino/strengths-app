@@ -15,8 +15,9 @@
           </label>
           <p class="text-2xl font-bold px-8"><%= @user.name %></p>
           <% unless @user == current_user %>
-            <div class="btn btn-outline btn-primary justify-end ">フォロー</div>
+            <%= render 'follow_form' if logged_in? %>
           <% end %>
+          <%= render 'shared/stats' %>
         </div>
         <div class="card card-side bg-base-100 shadow-xl">
           <div class="card-body">
@@ -45,7 +46,7 @@
                       <h2 class="card-title link link-hover"><%= link_to "#{episode.title}", episode_path(episode) %></h2>
                     </div>
                     <p><%=  html_safe_newline(episode.content) %></p>
-                    <div class="card-actions justify-end">
+                    <di class="card-actions justify-end">
                       <%= link_to "詳細ページへ", episode_path(episode), class:"btn btn-outline btn-primary" %>
                       <% if current_user.admin? || current_user?(episode.user) %>
                         <%= link_to "削除", episode, data: { "turbo-method": :delete,turbo_confirm: "投稿を削除します" }, class:"btn btn-outline btn-primary" %>
@@ -78,41 +79,4 @@
       </div>
     </div>
   </div>  
-</div>
-
-<div class="row">
-  <aside class="col-md-4">
-    <section class="user_info">
-      <h1>
-        <div class="w-10 rounded-full">
-          <% if @user.profile_icon.attached? %>
-            <%= image_tag @user.profile_icon %>
-          <% else %>
-            <%= image_tag("no_image.jpg", alt: "no_image") %>
-          <% end %>
-        </div>
-        <div class="w-40 rounded-full">
-          <% if @user.strength_image.attached? %>
-            <%= image_tag @user.strength_image %>
-          <% else %>
-            <%= image_tag("no_image.jpg", alt: "no_image") %>
-          <% end %>
-        </div>
-        <%= @user.name %>
-      </h1>
-    </section>
-    <section class="stats">
-      <%= render 'shared/stats' %>
-    </section>
-  </aside>
-  <div class="col-md-8">
-    <%= render 'follow_form' if logged_in? %>
-    <% if @user.episodes.any? %>
-      <h3>episodes (<%= @user.episodes.count %>)</h3>
-      <ol class="episodes">
-        <%= render @episodes %>
-      </ol>
-      <%= will_paginate @episodes %>
-    <% end %>
-  </div>
 </div>
