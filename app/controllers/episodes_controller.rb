@@ -27,7 +27,7 @@ class EpisodesController < ApplicationController
       redirect_to episodes_path
     else
       @feed_items = current_user.feed.paginate(page: params[:page])
-      render 'static_pages/home', status: :unprocessable_entity
+      render 'new', status: :unprocessable_entity
     end
   end
 
