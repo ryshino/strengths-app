@@ -1,15 +1,15 @@
 <% @user ||= current_user %>
 <div class="stats">
-  <a href="<%= following_user_path(@user) %>">
-    <strong id="following" class="stat">
+  <a href="<%= following_user_path(@user) %>" class="flex link link-info">
+    <strong id="following" class="stat w-1/3">
       <%= @user.following.count %>
     </strong>
-    フォロー
+    <p class="w-2/3 py-4">フォロー</p>
   </a>
-  <a href="<%= followers_user_path(@user) %>">
-    <strong id="followers" class="stat">
+  <a href="<%= followers_user_path(@user) %>" class="flex link link-info">
+    <strong id="followers" class="stat w-1/3">
       <%= @user.followers.count %>
     </strong>
-    フォロワー
+    <p class="w-2/3 py-4">フォロワー</p>
   </a>
 </div>

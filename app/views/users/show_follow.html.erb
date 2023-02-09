@@ -3,7 +3,7 @@
   <aside class="col-md-4">
     <section class="user_info">
       <% if @user.profile_icon.attached? %>
-        <%= image_tag @user.profile_icon.variant(:display) %>
+        <%= image_tag @user.profile_icon %>
       <% end %>
       <h1><%= link_to "#{@user.name}", @user %></h1>
       <span><strong>Episodes:</strong> <%= @user.episodes.count %></span>
@@ -14,7 +14,7 @@
         <div class="user_avatars">
           <% @users.each do |user| %>
             <% if user.profile_icon.attached? %>
-              <%= image_tag user.profile_icon.variant(:display) %>
+              <%= image_tag user.profile_icon %>
             <% end %>
           <% end %>
         </div>
