@@ -36,12 +36,16 @@
         <div class="card card-side bg-base-100 shadow-xl">
           <div class="card-body">
             <div class="flex flex-wrap">
-              <p class="card-title text-lg my-8">資質一覧</p>
-              <% if @episode.user.strength_image.attached? %>
-                <%= image_tag @episode.user.strength_image %>
-              <% else %>
-                <%= image_tag("no_image.jpg", alt: "no_image") %>
-              <% end %>
+              <p class="card-title text-lg md:text-xl my-8">資質一覧</p>
+            </div>
+            <div class="flex justify-center">
+              <div class="object-contain">
+                <% if @episode.user.strength_image.attached? %>
+                  <%= image_tag @episode.user.strength_image %>
+                <% else %>
+                  <%= image_tag("no_image.jpg", alt: "no_image") %>
+                <% end %>
+              </div>
             </div>
           </div>
         </div>
