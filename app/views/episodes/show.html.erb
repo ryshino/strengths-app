@@ -55,6 +55,29 @@
             <div class="flex flex-wrap">
               <p class="card-title text-lg my-8"><%= @episode.content %></p>
             </div>
+            <% @episode_tags.map do |k, v| [k, v] %>
+              <span class="badge rounded-pill bg-primary"><%= k %><%= v %></span> 
+            <% end %>
+
+            <div tabindex="0" class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box">
+              <input type="checkbox" /> 
+              <div class="collapse-title text-xl font-medium">
+                資質を選択する
+              </div>
+              <div class="collapse-content"> 
+                <%= form_with model: @tag_relation, url: tag_relations_path do |f| %>
+                  <%= render 'shared/error_messages', object: f.object %>
+                  <%= f.hidden_field :episode_id, value: @episode.id %>
+                    <%= f.collection_check_boxes(:tag_id, Tag.all, :id, :name, {checked: @current_user_select_tags, include_hidden: false}) do |tag| %>
+                      <%= tag.label do %>
+                        <%= tag.check_box class:"btn-check", id:"btn-check#{ tag }", autocomplete:"off" %>
+                        <%= tag.text %>
+                      <% end %>
+                    <% end %>
+                  <%= f.submit "資質を選択する" %>
+                <% end %>
+              </div>
+            </div>
           </div>
         </div>
       </div>
