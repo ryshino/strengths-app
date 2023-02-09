@@ -61,7 +61,10 @@
             </div>
             <div class="flex flex-wrap">
               <% @episode_tags.map do |k, v| [k, v] %>
-                <span class="badge badge-primary mx-4 mb-4"><%= k %><%= v %></span> 
+                <button class="badge badge-md badge-primary gap-2 ml-4 mb-4">
+                  <%= k %>
+                  <div class="badge badge-ghost badge-xs"><%= v %></div>
+                </button>
               <% end %>
             </div>
 
