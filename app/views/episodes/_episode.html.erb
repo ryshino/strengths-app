@@ -21,7 +21,7 @@
           <h2 class="card-title link link-hover"><%= link_to "#{episode.title}", episode_path(episode) %></h2>
         </div>
       </div>
-      <p><%=  html_safe_newline(episode.content) %></p>
+      <p><%=  episode.content.truncate(50) %></p>
       <div class="card-actions justify-end">
         <%= link_to "詳細ページへ", episode_path(episode), class:"btn btn-outline btn-primary" %>
         <% if current_user.admin? || current_user?(episode.user) %>
