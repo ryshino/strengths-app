@@ -1,33 +1,59 @@
 <% provide(:title, @title) %>
-<div class="row">
-  <aside class="col-md-4">
-    <section class="user_info">
-      <% if @user.profile_icon.attached? %>
-        <%= image_tag @user.profile_icon %>
-      <% end %>
-      <h1><%= link_to "#{@user.name}", @user %></h1>
-      <span><strong>Episodes:</strong> <%= @user.episodes.count %></span>
-    </section>
-    <section class="stats">
-      <%= render 'shared/stats' %>
-      <% if @users.any? %>
-        <div class="user_avatars">
-          <% @users.each do |user| %>
-            <% if user.profile_icon.attached? %>
-              <%= image_tag user.profile_icon %>
+<section class="text-gray-600 body-font">
+  <div class="container px-5 py-12 mx-auto flex flex-wrap">
+    <div class="flex flex-wrap w-full">
+      <div class="lg:w-1/2 px-4 mb-8">
+        <div class="flex flex-wrap w-full">
+          <div class="flex w-2/3 px-4">
+            <div class="avatar">
+              <div class="w-24 rounded-full">
+                <% if @user.profile_icon.attached? %>
+                  <%= image_tag @user.profile_icon %>
+                <% else %>
+                  <%= image_tag("no_image.jpg", alt: "no_image") %>
+                <% end %>
+              </div>
+            </div>
+            <p class="text-2xl font-bold px-4 py-8"><%= @user.name %></p>
+          </div>
+          <div class="w-1/3 px-4 py-8">
+            <% unless @user == current_user %>
+              <%= render 'follow_form' if logged_in? %>
             <% end %>
-          <% end %>
+          </div>
         </div>
-      <% end %>
-    </section>
-  </aside>
-  <div class="col-md-8">
-    <h3><%= @title %></h3>
-    <% if @users.any? %>
-      <ul class="users follow">
-        <%= render @users %>
-      </ul>
-      <%= will_paginate %>
-    <% end %>
+        <div class="flex flex-wrap w-full justify-center">
+          <%= render 'shared/stats' %>
+        </div>
+        <div class="card card-side bg-base-100 shadow-xl">
+          <div class="card-body">
+            <div class="flex justify-center">
+              <div class="object-contain">
+                <% if @user.strength_image.attached? %>
+                  <%= image_tag @user.strength_image %>
+                <% else %>
+                  <%= image_tag("no_image.jpg", alt: "no_image") %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="lg:w-1/2 w-full px-4">
+        <div class="flex flex-wrap mb-8">
+          <% if @title == "フォロー中" %>
+            <p class="text-xl font-semibold"><%= @title %></p>
+            <p class="text-xl text-gray-400 font-semibold mx-auto link link-hover"><%= link_to "フォロワー", followers_user_path(@user) %></p>
+          <% else %>
+            <p class="text-xl text-gray-400 font-semibold link link-hover"><%= link_to "フォロワー", following_user_path(@user) %></p>
+            <p class="text-xl font-semibold mx-auto"><%= @title %></p>
+          <% end %>
+          <p class="text-xl text-gray-400 font-semibold link link-hover"><%= link_to "エピソード一覧", user_path(@user) %></p>
+        </div>
+        <div class="flex flex-wrap -m-4">
+          <%= render @users %>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+</section>
