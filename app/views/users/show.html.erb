@@ -40,8 +40,10 @@
         </div>
       </div>
       <div class="lg:w-1/2 w-full px-4">
-        <div class="flex flex-wrap mb-8 text-xl font-semibold">
-          <%= @user.name %>さんのエピソード一覧
+        <div class="flex flex-wrap mb-8">
+          <p class="text-xl text-gray-400 font-semibold link link-hover"><%= link_to "フォロワー中", following_user_path(@user) %></p>
+          <p class="text-xl text-gray-400 font-semibold link link-hover mx-auto"><%= link_to "フォロワー", followers_user_path(@user) %></p>
+          <p class="text-xl font-semibold">エピソード一覧</p>
         </div>
         <div class="flex flex-wrap -m-4">
           <% if @episodes.any? %>
@@ -69,7 +71,6 @@
     </div>
   </div>
 </section>
-
 
 <div class="fixed bottom-8 right-8">
   <!-- The button to open modal -->
