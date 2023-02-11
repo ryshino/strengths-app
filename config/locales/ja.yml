@@ -1,0 +1,11 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        name: "リベ名"
+        profile: "プロフィールURL"
+        password: "パスワード"
+        password_confirmation: "パスワード確認"
+      episode:
+        title: "タイトル"
+        content: "内容"
