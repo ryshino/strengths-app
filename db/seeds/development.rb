@@ -19,7 +19,7 @@ end
 # 最初の6人だけにエピソードを追加
 users = User.order(:created_at).take(6)
 50.times do
-  title = Faker::Games::Pokemon.name
+  title = Faker::Lorem.sentence
   content = Faker::Lorem.sentence(word_count: 5)
   users.each { |user| user.episodes.create!(title: title, content: content) }
 end
