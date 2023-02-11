@@ -1,24 +1,38 @@
 <% provide(:title, "ログイン") %>
-<h1>ログイン</h1>
-
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_with(url: login_path, scope: :session) do |f| %>
-
-      <%= f.label :profile %>
-      <%= f.text_field :profile, class: 'form-control' %>
-
-      <%= f.label :password %>
-      <%= f.password_field :password, class: 'form-control' %>
-
-      <%= f.label :remember_me, class: "checkbox inline" do %>
-      <%= f.check_box :remember_me %>
-        <span>ログイン状態を記憶する</span>
-      <% end %>
-
-      <%= f.submit "ログイン", class: "btn btn-primary" %>
-    <% end %>
-
-    <p><%= link_to "新規登録はこちら", signup_path %></p>
+<section class="text-gray-600 body-font relative">
+  <div class="container px-5 py-8 mx-auto">
+    <div class="flex flex-col text-center w-full mb-8">
+      <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">ログイン</h1>
+    </div>
+    <div class="lg:w-1/2 md:w-2/3 mx-auto">
+      <div class="flex flex-wrap -m-2 justify-center">
+        <%= form_with(url: login_path, scope: :session) do |f| %>
+          <div class="p-2 w-full">
+            <div class="relative">
+              <label class="leading-7 text-base text-gray-600">プロフィールURL</label>
+              <%= f.text_field :profile, class:"input input-bordered input-info w-full bg-white" %>
+            </div>
+          </div>
+          <div class="p-2 w-full">
+            <div class="relative">
+              <label class="leading-7 text-base text-gray-600">パスワード</label>
+              <%= f.password_field :password, class:"input input-bordered input-info w-full bg-white" %>
+            </div>
+          </div>
+          <div class="p-2 w-full">
+            <div class="relative">
+              <label class="label cursor-pointer">
+                <span class="label-text text-base">ログイン状態を記憶する</span> 
+                <%= f.check_box :remember_me, class:"checkbox checkbox-primary" %>
+              </label>
+            </div>
+          </div>          
+          <div class="flex justify-around p-4 w-full">
+            <%= link_to "新規登録画面へ", new_user_path, class: "btn  btn-outline btn-primary flex mx-4 py-2 px-8 text-lg" %>
+            <%= f.submit "ログイン", class: "btn btn-primary flex mx-8 py-2 px-8 text-lg" %>
+          </div>          
+        <% end %>
+      </div>
+    </div>
   </div>
-</div>
+</section>

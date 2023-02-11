@@ -1,27 +1,58 @@
-<%= form_with(model: @user) do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
-
-  <%= f.label :name, "リベ名" %>
-  <%= f.text_field :name, class: 'form-control' %>
-
-  <%= f.label :profile, "プロフィールURL" %>
-  <%= f.text_field :profile, class: 'form-control' %>
-
-  <%= f.label :password, "パスワード" %>
-  <%= f.password_field :password, class: 'form-control' %>
-
-  <%= f.label :password_confirmation, "確認用" %>
-  <%= f.password_field :password_confirmation, class: 'form-control' %>
-
-  <%= f.label :profile_icon, "プロフィールアイコン" %>
-  <span class="image">
-    <%= f.file_field :profile_icon, accept: "image/jpeg,image/gif,image/png" %>
-  </span>
-
-  <%= f.label :strength_image, "資質一覧の写真" %>
-  <span class="image">
-    <%= f.file_field :strength_image, accept: "image/jpeg,image/gif,image/png" %>
-  </span>
-  
-  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
-<% end %>
+<section class="text-gray-600 body-font relative">
+  <div class="container px-5 py-8 mx-auto">
+    <div class="flex flex-col text-center w-full mb-8">
+      <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900"><%= yield(:form_title) %></h1>
+    </div>
+    <div class="lg:w-1/2 md:w-2/3 mx-auto">
+      <div class="flex flex-wrap -m-2 justify-center">
+        <%= form_with(model: @user) do |f| %>
+          <%= render 'shared/error_messages', object: f.object %>
+          <div class="p-2 w-full">
+            <div class="relative">
+              <label class="leading-7 text-base text-gray-600">リベ名</label>
+              <%= f.text_field :name, class:"input input-bordered input-info w-full bg-white" %>
+            </div>
+          </div>
+          <div class="p-2 w-full">
+            <div class="relative">
+              <label class="leading-7 text-base text-gray-600">プロフィールURL</label>
+              <%= f.text_field :profile, class:"input input-bordered input-info w-full bg-white" %>
+            </div>
+          </div>
+          <div class="p-2 w-full">
+            <div class="relative">
+              <label class="leading-7 text-base text-gray-600">パスワード</label>
+              <%= f.password_field :password, class:"input input-bordered input-info w-full bg-white" %>
+            </div>
+          </div>
+          <div class="p-2 w-full">
+            <div class="relative">
+              <label class="leading-7 text-base text-gray-600">確認用</label>
+              <%= f.password_field :password_confirmation, class:"input input-bordered input-info w-full bg-white" %>
+            </div>
+          </div>
+          <div class="p-2 w-full">
+            <div class="relative">
+              <label class="leading-7 text-base text-gray-600">プロフィールアイコン</label>
+              <%= f.file_field :profile_icon, accept: "image/jpeg,image/gif,image/png", class:"file-input file-input-bordered file-input-primary w-full" %>
+            </div>
+          </div>
+          <div class="p-2 w-full">
+            <div class="relative">
+              <label class="leading-7 text-base text-gray-600">資質一覧の写真</label>
+              <%= f.file_field :strength_image, accept: "image/jpeg,image/gif,image/png", class:"file-input file-input-bordered file-input-primary w-full" %>
+            </div>
+          </div>
+          <div class="flex justify-around p-4 w-full">
+          <% if logged_in? %>
+            <%= f.submit yield(:button_text), class: "btn btn-primary flex mx-auto py-2 px-8 text-lg" %>
+          <% else %>
+            <%= link_to "ログイン画面へ", login_path, class: "btn  btn-outline btn-primary flex mx-4 py-2 px-8 text-lg" %>
+            <%= f.submit yield(:button_text), class: "btn btn-primary flex mx-8 py-2 px-8 text-lg" %>
+          <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
