@@ -97,3 +97,5 @@ gem "image_processing"
 
 gem 'ransack'
 gem "tailwindcss-rails"
+
+gem 'rails-i18n'
