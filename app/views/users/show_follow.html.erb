@@ -45,7 +45,7 @@
             <p class="text-xl font-semibold"><%= @title %></p>
             <p class="text-xl text-gray-400 font-semibold mx-auto link link-hover"><%= link_to "フォロワー", followers_user_path(@user) %></p>
           <% else %>
-            <p class="text-xl text-gray-400 font-semibold link link-hover"><%= link_to "フォロワー", following_user_path(@user) %></p>
+            <p class="text-xl text-gray-400 font-semibold link link-hover"><%= link_to "フォロー中", following_user_path(@user) %></p>
             <p class="text-xl font-semibold mx-auto"><%= @title %></p>
           <% end %>
           <p class="text-xl text-gray-400 font-semibold link link-hover"><%= link_to "エピソード一覧", user_path(@user) %></p>
