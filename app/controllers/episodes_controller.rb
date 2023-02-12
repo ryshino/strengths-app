@@ -36,7 +36,7 @@ class EpisodesController < ApplicationController
     @tag_relation = current_user.tag_relations.find_or_initialize_by(episode_id: @episode.id)
     @current_user_select_tags = current_user.tag_relations.where(episode_id: @episode.id).pluck(:tag_id)
     search_select_tags = Episode.joins(tag_relations: :tag).group(:episode_id, :name).
-                  having("episode_id == ?", @episode.id.to_s).size
+                  having("episode_id == ?", @episode.id).size
     @episode_tags = search_select_tags.map { |k, v| [k.slice(1), v] }
   end
 
