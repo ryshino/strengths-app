@@ -21,12 +21,26 @@
           <h2 class="card-title link link-hover"><%= link_to "#{episode.title}", episode_path(episode) %></h2>
         </div>
       </div>
-      <p><%=  episode.content.truncate(50) %></p>
+      <div class="flex flex-wrap">
+        <p><%=  episode.content.truncate(50) %></p>
+      </div>
+      <% unless episode.tags.empty? %>
+        <div class="flex flex-wrap">
+          <button class="badge badge-md badge-primary gap-2 ml-4 my-4">
+            <%= episode.tags.group(:name).count.first.first %>
+            <div class="badge badge-ghost badge-xs"><%= episode.tags.group(:name).count.first.second %></div>
+          </button>
+          <p class="ml-2 my-auto">+<%= episode.tags.group(:name).drop(1).count %></p>
+          </button>
+        </div>
+      <% end %>
       <div class="card-actions justify-end">
-        <%= link_to "詳細ページへ", episode_path(episode), class:"btn btn-outline btn-primary" %>
-        <% if current_user.admin? || current_user?(episode.user) %>
-          <%= link_to "削除", episode, data: { "turbo-method": :delete,turbo_confirm: "投稿を削除します" }, class:"btn btn-outline btn-primary" %>
-        <% end %>
+        <div class="flex">
+          <%= link_to "詳細ページへ", episode_path(episode), class:"btn btn-outline btn-primary" %>
+          <% if current_user.admin? || current_user?(episode.user) %>
+            <%= link_to "削除", episode, data: { "turbo-method": :delete,turbo_confirm: "投稿を削除します" }, class:"btn btn-outline btn-primary ml-4" %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
