@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   before_action :set_q, only: [:index]
 
   def index
-    @users = @q.result.paginate(page: params[:page])
+    @users = @q.result.page(params[:page]).per(12)
     if @users.blank?
       flash.now[:success] = "該当のユーザーは見つかりませんでした。"
     end
@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @episodes = @user.episodes.paginate(page: params[:page])
+    @episodes = @user.episodes.page(params[:page]).per(12)
   end
 
   def new
@@ -56,14 +56,14 @@ class UsersController < ApplicationController
   def following
     @title = "フォロー中"
     @user  = User.find(params[:id])
-    @users = @user.following.paginate(page: params[:page])
+    @users = @user.following.page(params[:page]).per(12)
     render 'show_follow', status: :unprocessable_entity
   end
 
   def followers
     @title = "フォロワー"
     @user  = User.find(params[:id])
-    @users = @user.followers.paginate(page: params[:page])
+    @users = @user.followers.page(params[:page]).per(12)
     render 'show_follow', status: :unprocessable_entity
   end
 

@@ -19,8 +19,16 @@
         <% end %>
       </div>
     </div>
-    <div class="flex flex-wrap -m-4">
-      <%= render @users %>
+    <div id="users">
+      <%# 今のページの`<turbo-frame>` %>
+      <%= turbo_frame_tag "users-page-#{@users.current_page}" do %>
+      <%# 今のページで取得したCat一覧 %>
+      <div class="flex flex-wrap -m-4 my-4">
+        <%= render @users %>
+      </div>
+      <%# 遅延読み込みで次ページを取得する`<turbo-frame>` %>
+      <%= turbo_frame_tag "users-page-#{@users.next_page}", loading: :lazy, src: path_to_next_page(@users) %>
+      <% end %>
     </div>
   </div>
 </section>

@@ -92,7 +92,7 @@ gem 'pry-rails'
 gem "faker"
 gem 'gimei'
 
-gem "will_paginate"
+gem 'kaminari'
 gem "active_storage_validations"
 gem "image_processing"
 
