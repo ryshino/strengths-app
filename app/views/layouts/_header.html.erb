@@ -11,7 +11,7 @@
           <li><%= link_to "新規投稿", new_episode_path %></li>
       </div>
     <% end %>
-    <a class="btn btn-ghost normal-case text-xl">StrengthsApp</a>
+    <%= link_to "StrengthsApp", root_path, class:"btn btn-ghost normal-case text-xl"  %>
   </div>
   <% if logged_in? %>
     <div class="navbar-start hidden lg:flex">
