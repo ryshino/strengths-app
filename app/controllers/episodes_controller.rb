@@ -4,7 +4,7 @@ class EpisodesController < ApplicationController
   before_action :set_q, only: [:index]
 
   def index
-    @episodes = @q.result.paginate(page: params[:page])
+    @episodes = @q.result.page(params[:page]).per(10)
     @episode  = current_user.episodes.build
     if @episodes.blank?
       flash.now[:success] = "該当のエピソードは見つかりませんでした。"

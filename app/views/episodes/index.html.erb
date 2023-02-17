@@ -33,8 +33,10 @@
         <% end %>
       </div>
     </div>
+    <%= paginate @episodes %>
     <div class="flex flex-wrap -m-4">
       <%= render @episodes %>
     </div>
+    <%= paginate @episodes %>
   </div>
 </section>
