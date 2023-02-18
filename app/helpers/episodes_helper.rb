@@ -14,7 +14,8 @@ module EpisodesHelper
   end
 
   def other_episode_tas_count(episode)
-    episode_tags = episode.tags.group(:name).drop(1)
-    episode_tags.count
+    episode_tags = episode.tags.group(:name)
+    other_episode_tags = episode_tags.drop(1)
+    other_episode_tags.count
   end
 end
