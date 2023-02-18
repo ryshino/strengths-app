@@ -33,7 +33,7 @@
         <div class="card-actions justify-end">
           <div class="flex">
             <%= link_to "詳細ページへ", episode_path(episode), class:"btn btn-outline btn-primary" %>
-            <% if current_user.admin? || current_user?(episode.user) %>
+            <% if current_user?(episode.user) %>
               <%= link_to "削除", episode, data: { "turbo-method": :delete,turbo_confirm: "投稿を削除します" }, class:"btn btn-outline btn-primary ml-4" %>
             <% end %>
           </div>
