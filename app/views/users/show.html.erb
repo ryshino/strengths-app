@@ -45,22 +45,20 @@
           <p class="text-xl text-gray-400 font-semibold link link-hover mx-auto"><%= link_to "フォロワー", followers_user_path(@user) %></p>
           <p class="text-xl font-semibold">エピソード一覧</p>
         </div>
-        <div class="flex flex-wrap -m-4">
-          <% if @episodes.any? %>
+        <% if @episodes.any? %>
+          <div id="episodes">
             <div id="episodes">
-              <div id="episodes">
-                <%# 今のページの`<turbo-frame>` %>
-                <%= turbo_frame_tag "episodes-page-#{@episodes.current_page}" do %>
-                <%# 今のページで取得したCat一覧 %>
-                <div class="flex flex-wrap -m-4 my-4">
-                  <%= render @episodes %>
-                </div>
-                <%# 遅延読み込みで次ページを取得する`<turbo-frame>` %>
-                <%= turbo_frame_tag "episodes-page-#{@episodes.next_page}", loading: :lazy, src: path_to_next_page(@episodes) %>
-                <% end %>
+              <%# 今のページの`<turbo-frame>` %>
+              <%= turbo_frame_tag "episodes-page-#{@episodes.current_page}" do %>
+              <%# 今のページで取得したCat一覧 %>
+              <div class="flex flex-wrap -m-4 my-4">
+                <%= render @episodes %>
               </div>
-          <% end %>
-        </div>
+              <%# 遅延読み込みで次ページを取得する`<turbo-frame>` %>
+              <%= turbo_frame_tag "episodes-page-#{@episodes.next_page}", loading: :lazy, src: path_to_next_page(@episodes) %>
+              <% end %>
+            </div>
+        <% end %>
       </div>
     </div>
   </div>
