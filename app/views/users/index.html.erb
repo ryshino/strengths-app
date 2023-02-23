@@ -1,7 +1,7 @@
 <% provide(:title, 'All users') %>
 <section class="text-gray-600">
   <div class="container p-8 mx-auto">
-    <div class="flex flex-wrap w-full mb-20">
+    <div class="md:flex md:flex-wrap w-full mb-20">
       <div class="md:w-1/2 w-full mb-6 md:mb-0">
         <h1 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">ユーザー 一覧</h1>
       </div>
@@ -19,16 +19,21 @@
         <% end %>
       </div>
     </div>
-    <div id="users">
-      <%# 今のページの`<turbo-frame>` %>
-      <%= turbo_frame_tag "users-page-#{@users.current_page}" do %>
-      <%# 今のページで取得したCat一覧 %>
-      <div class="flex flex-wrap -m-4 my-4">
-        <%= render @users %>
+    <div class="relative">
+      <div id="users" class="absolute">
+        <%# 今のページの`<turbo-frame>` %>
+        <%= turbo_frame_tag "users-page-#{@users.current_page}" do %>
+        <%# 今のページで取得したユーザー一覧 %>
+        <div class="flex flex-wrap -m-4 my-4">
+          <%= render @users %>
+        </div>
+        <%# 遅延読み込みで次ページを取得する`<turbo-frame>` %>
+        <%= turbo_frame_tag "users-page-#{@users.next_page}", loading: :lazy, src: path_to_next_page(@users) %>
+        <% end %>
       </div>
-      <%# 遅延読み込みで次ページを取得する`<turbo-frame>` %>
-      <%= turbo_frame_tag "users-page-#{@users.next_page}", loading: :lazy, src: path_to_next_page(@users) %>
-      <% end %>
+      <div class="absolute">
+        <%= render 'shared/back_button' %>
+      </div>
     </div>
   </div>
 </section>

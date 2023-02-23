@@ -46,16 +46,21 @@
           <p class="text-xl font-semibold">エピソード一覧</p>
         </div>
         <% if @episodes.any? %>
-          <div id="episodes">
-            <%# 今のページの`<turbo-frame>` %>
-            <%= turbo_frame_tag "episodes-page-#{@episodes.current_page}" do %>
-            <%# 今のページで取得したCat一覧 %>
-            <div class="flex flex-wrap -m-4 my-4">
-              <%= render @episodes %>
+          <div class="relative">
+            <div id="episodes" class="absolute">
+              <%# 今のページの`<turbo-frame>` %>
+              <%= turbo_frame_tag "episodes-page-#{@episodes.current_page}" do %>
+                <%# 今のページで取得したエピソード一覧 %>
+                <div class="flex flex-wrap -m-4 my-4">
+                  <%= render @episodes %>
+                </div>
+                <%# 遅延読み込みで次ページを取得する`<turbo-frame>` %>
+                <%= turbo_frame_tag "episodes-page-#{@episodes.next_page}", loading: :lazy, src: path_to_next_page(@episodes) %>
+              <% end %>
             </div>
-            <%# 遅延読み込みで次ページを取得する`<turbo-frame>` %>
-            <%= turbo_frame_tag "episodes-page-#{@episodes.next_page}", loading: :lazy, src: path_to_next_page(@episodes) %>
-            <% end %>
+              <div class="absolute">
+                <%= render 'shared/back_button' %>
+              </div>
           </div>
         <% end %>
       </div>
