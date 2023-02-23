@@ -1,12 +1,12 @@
-<% if tag.text == "達成欲" %>
-  <div class="badge bg-purple-400 text-black w-full">実行力</div>
-<% end %>
-<% if tag.text == "活発性" %>
-  <div class="badge bg-yellow-400 text-black w-full">影響力</div>
-<% end %>
-<% if tag.text == "適応性" %>
-  <div class="badge bg-blue-400 text-black w-full">人間関係構築力</div>
-<% end %>
-<% if tag.text == "分析思考" %>
-  <div class="badge bg-green-300 text-black w-full">戦略的思考力</div>
+<% if tag.text.in?(["達成欲","活発性","適応性","分析思考"]) %>
+  <% case tag.text %>
+  <% when "達成欲"%>
+    <div class="badge bg-purple-400 text-black w-full">実行力</div>
+  <% when "活発性" %>
+    <div class="badge bg-yellow-400 text-black w-full">影響力</div>
+  <% when "適応性" %>
+    <div class="badge bg-blue-400 text-black w-full">人間関係構築力</div>
+  <% when "分析思考" %>
+    <div class="badge bg-green-300 text-black w-full">戦略的思考力</div>
+  <% end %>
 <% end %>
