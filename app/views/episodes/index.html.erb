@@ -18,10 +18,11 @@
               </div>
               <div class="collapse-content"> 
                 <%= f.collection_check_boxes :tags_id_in, Tag.all, :id, :name, {include_hidden: false} do |tag| %>
-                    <%= tag.label do %>
-                      <%= tag.check_box %>
-                      <%= tag.text %>
-                    <% end %>
+                  <%= render 'tags/containing_element', tag: tag %>
+                  <%= tag.label do %>
+                    <%= tag.check_box %>
+                    <%= tag.text %>
+                  <% end %>
                 <% end %>
               </div>
             </div>

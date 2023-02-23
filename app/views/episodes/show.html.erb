@@ -78,18 +78,7 @@
                   <%= render 'shared/error_messages', object: f.object %>
                   <%= f.hidden_field :episode_id, value: @episode.id %>
                     <%= f.collection_check_boxes(:tag_id, Tag.all, :id, :name, {checked: @current_user_select_tags, include_hidden: false}) do |tag| %>
-                      <% if tag.text == "達成欲" %>
-                        <div class="badge w-full">実行力</div>
-                      <% end %>
-                      <% if tag.text == "活発性" %>
-                        <div class="badge badge-warning w-full">影響力</div>
-                      <% end %>
-                      <% if tag.text == "適応性" %>
-                        <div class="badge badge-info w-full">人間関係構築力</div>
-                      <% end %>
-                      <% if tag.text == "分析思考" %>
-                        <div class="badge badge-success w-full">戦略的思考力</div>
-                      <% end %>
+                      <%= render 'tags/containing_element', tag: tag %>
                       <%= tag.check_box %>
                       <%= tag.text %>
                     <% end %>
