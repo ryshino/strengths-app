@@ -33,13 +33,13 @@ https://qiita.com/yatchi_323/private/968f9121139472fceffe
 
 
 ## 機能一覧
-+ ユーザー登録、ログイン(自作)
++ ユーザー登録、ログイン
   + アイコン・資質一覧の画像登録(Active Storage)
   + フォロー機能
+  + 自作バリデーション
 + 投稿機能
   + 資質のタグ付け機能(他のユーザーもタグ付け可能)
 + 無限スクロール(Turbo Frames)
-+ 無限スクロール(JavaScript)
 + 検索機能(ransack)
 
 
