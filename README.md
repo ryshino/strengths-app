@@ -29,7 +29,7 @@ https://qiita.com/yatchi_323/private/968f9121139472fceffe
 + minitest
 
 ## ER図
-<img width="888" alt="6670258a385aaca763bd962dc7a73f0d (1)" src="https://user-images.githubusercontent.com/74131105/221347051-f90a5363-ece6-42ad-af9a-31213672f7b2.png">
+<img width="679" alt="67735b54effc56c31b7e0f3a67816c37" src="https://user-images.githubusercontent.com/74131105/222872076-8bc95058-1f10-46cd-9ca2-8bff533298ea.png">
 
 
 ## 機能一覧
