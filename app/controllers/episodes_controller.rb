@@ -26,7 +26,6 @@ class EpisodesController < ApplicationController
       flash[:success] = "エピソードを投稿しました"
       redirect_to episodes_path
     else
-      @feed_items = current_user.feed.paginate(page: params[:page])
       render 'new', status: :unprocessable_entity
     end
   end
