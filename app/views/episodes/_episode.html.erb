@@ -24,15 +24,6 @@
         <div class="flex flex-wrap">
           <p><%=  episode.content.truncate(50) %></p>
         </div>
-        <% unless episode.tags.empty? %>
-          <div class="flex flex-wrap">
-            <button class="badge badge-md badge-primary gap-2 ml-4 my-4">
-              <%= episode_tag_name(episode) %>
-              <div class="badge badge-ghost badge-xs"><%= episode_tag_count(episode) %></div>
-            </button>
-            <p class="ml-2 my-auto">+<%= other_episode_tas_count(episode) %></p>
-          </div>
-        <% end %>
         <div class="card-actions justify-end">
           <div class="flex">
             <%= link_to "詳細ページへ", episode_path(episode), class:"btn btn-outline btn-primary" %>
