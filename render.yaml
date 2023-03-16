@@ -2,13 +2,13 @@ databases:
   - name: strengths-app
     databaseName: strengths_app
     user: ryshino
-    region: singapore
+    region: oregon
 
 services:
   - type: web
     name: strengths-app
     env: ruby
-    region: singapore
+    region: oregon
     buildCommand: "./bin/render-build.sh"
     startCommand: "bundle exec puma -C config/puma.rb"
     envVars:
