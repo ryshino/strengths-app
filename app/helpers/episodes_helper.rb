@@ -5,16 +5,12 @@ module EpisodesHelper
     h(str).gsub(/\n|\r|\r\n/, "<br>").html_safe
   end
 
-  def episode_tag_name(episode)
-    episode.tags.group(:name).count.first.first
-  end
-
-  def episode_tag_count(episode)
-    episode.tags.group(:name).count.first.second
-  end
-
-  def other_episode_tas_count(episode)
-    other_episode_tas = episode.tags.group(:name).drop(1)
-    other_episode_tas.count
+  def episode_tags_info(episode)
+    tags = episode.tags.group(:name).count.to_a
+    {
+      tag_name: tags.first[0],
+      tag_count: tags.first[1],
+      other_tag_count: tags.drop(1).count
+    }
   end
 end
