@@ -6,13 +6,13 @@ module EpisodesHelper
   end
 
   def episode_tags_info(episode)
-    # エピソードに紐づくタグ名と選択された数を取得
-    tag_counts = episode.tags.group(:name).count
-    # ハッシュ形式で返している
+    # 選択されたタグの多い順、同数の場合はタグ名で昇順にしている
+    tag_counts = episode.tags.group(:name).count.sort_by { |name, count| [-count, name] }
     {
-      tag_name: tag_counts.keys.first,
-      tag_count: tag_counts.values.first,
+      tag_name: tag_counts.first[0],
+      tag_count: tag_counts.first[1],
       other_tag_count: tag_counts.size - 1
     }
   end
+  
 end
