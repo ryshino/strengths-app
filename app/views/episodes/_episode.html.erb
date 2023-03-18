@@ -1,8 +1,4 @@
-<% if current_page?(episodes_path) %>
-  <div class="md:w-1/2 xl:w-1/4 p-4">
-<% else %>
-  <div class="md:w-1/2 xl:w-1/2 p-4">
-<% end %>
+<div class="<%= current_page?(episodes_path) ? 'md:w-1/2 xl:w-1/4' : 'md:w-1/2 xl:w-1/2' %> p-4">
     <div class="card card-side bg-base-100 shadow-xl">
       <div class="card-body">
         <div class="flex flex-wrap">
@@ -24,6 +20,18 @@
         <div class="flex flex-wrap">
           <p><%=  episode.content.truncate(50) %></p>
         </div>
+        <% unless episode.tags.empty? %>
+          <% tag_info = episode_tags_info(episode) %>
+          <div class="flex flex-wrap">
+            <button class="badge badge-md badge-primary gap-2 ml-4 my-4">
+              <%= tag_info[:tag_name] %>
+              <div class="badge badge-ghost badge-xs"><%= tag_info[:tag_count] %></div>
+            </button>
+            <% if tag_info[:other_tag_count] > 0 %>
+              <p class="ml-2 my-auto">+<%= tag_info[:other_tag_count] %></p>
+            <% end %>
+          </div>
+        <% end %>
         <div class="card-actions justify-end">
           <div class="flex">
             <%= link_to "詳細ページへ", episode_path(episode), class:"btn btn-outline btn-primary" %>
