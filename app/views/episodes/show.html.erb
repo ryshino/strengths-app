@@ -60,10 +60,10 @@
               <p class="card-title text-lg my-8"><%= html_safe_newline(@episode.content) %></p>
             </div>
             <div class="flex flex-wrap">
-              <% @episode_tags.map do |k, v| [k, v] %>
+              <% @episode_tags.map do |tag_name, tag_count| [tag_name, tag_count] %>
                 <button class="badge badge-md badge-primary gap-2 ml-4 mb-4">
-                  <%= k %>
-                  <div class="badge badge-ghost badge-xs"><%= v %></div>
+                  <%= tag_name %>
+                  <div class="badge badge-ghost badge-xs"><%= tag_count %></div>
                 </button>
               <% end %>
             </div>
