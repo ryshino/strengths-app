@@ -6,11 +6,13 @@ module EpisodesHelper
   end
 
   def episode_tags_info(episode)
-    tags = episode.tags.group(:name).count.to_a
+    # エピソードに紐づくタグ名と選択された数を取得
+    tag_counts = episode.tags.group(:name).count
+    # ハッシュ形式で返している
     {
-      tag_name: tags.first[0],
-      tag_count: tags.first[1],
-      other_tag_count: tags.drop(1).count
+      tag_name: tag_counts.keys.first,
+      tag_count: tag_counts.values.first,
+      other_tag_count: tag_counts.size - 1
     }
   end
 end
