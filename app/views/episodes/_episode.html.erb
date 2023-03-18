@@ -1,8 +1,4 @@
-<% if current_page?(episodes_path) %>
-  <div class="md:w-1/2 xl:w-1/4 p-4">
-<% else %>
-  <div class="md:w-1/2 xl:w-1/2 p-4">
-<% end %>
+<div class="<%= current_page?(episodes_path) ? 'md:w-1/2 xl:w-1/4' : 'md:w-1/2 xl:w-1/2' %> p-4">
     <div class="card card-side bg-base-100 shadow-xl">
       <div class="card-body">
         <div class="flex flex-wrap">
