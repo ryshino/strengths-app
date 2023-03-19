@@ -21,15 +21,14 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "名前の長さをテスト" do
-    @user.name = "a" * 51
+    @user.name = "a" * 21
     assert_not @user.valid?
   end
 
-  #リベのプロフィールでは検証の必要がないためコメントアウト
-  # test "profile should not be too long" do
-  #   @user.profile = "a" * 244 + "@example.com"
-  #   assert_not @user.valid?
-  # end
+  test "プロフィールURLの長さに関するテスト" do
+    @user.profile = "https://libecity.com/user_profile/test" + "a" * 244
+    assert_not @user.valid?
+  end
 
   #eachにする必要はないが勉強のためあえて%wを使用
   test "有効なURLをテスト" do

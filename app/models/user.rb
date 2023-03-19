@@ -24,7 +24,8 @@ class User < ApplicationRecord
                                               message:   "ファイルサイズが5MB以上あるため投稿できません" }
 
   validates :name,  presence: true, length: { maximum: 20 }
-  validates :profile, presence: true, uniqueness: true
+  # ほとんどのデータベースでは文字列の上限を255としているため、maximumを設定
+  validates :profile, presence: true, uniqueness: true, length: { maximum: 255 }
   validate :check_profile
   #:allow_nilオプションは、対象の値がnilの場合にバリデーションをスキップする
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true

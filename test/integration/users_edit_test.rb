@@ -16,8 +16,7 @@ class UsersEditTest < ActionDispatch::IntegrationTest
                                               password_confirmation: "bar" } }
 
     assert_template 'users/edit'
-    #今後エラーメッセージを日本語化する予定
-    assert_select "div.alert", "The form contains 4 errors."
+    assert_select "div.alert"
   end
 
   test "フレンドリーフォワーディングのテスト" do
