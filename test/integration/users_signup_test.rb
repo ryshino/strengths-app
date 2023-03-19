@@ -17,7 +17,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
 
     #エラーメッセージが存在するか確認
     assert_select 'div#error_explanation'
-    assert_select 'div.alert-danger'
+    assert_select 'div.alert-error'
   end
 
   test "有効なユーザー登録に対するテスト" do
@@ -26,6 +26,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
       post users_path, params: { user: { name:  "テスト",
                                         profile: "https://libecity.com/user_profile/test",
                                         profile_icon: img,
+                                        strength_image: img,
                                         password:              "password",
                                         password_confirmation: "password" } }
     end
@@ -34,5 +35,6 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     assert_not flash.empty?
     assert is_logged_in?
     assert assigns[:user].profile_icon.attached?
+    assert assigns[:user].strength_image.attached?
   end
 end
