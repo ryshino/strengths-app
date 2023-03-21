@@ -22,6 +22,8 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
 
   test "有効なユーザー登録に対するテスト" do
     img  = fixture_file_upload('kitten.jpg', 'image/jpeg')
+    get signup_path
+    assert_select 'input[type= file]'
     assert_difference 'User.count', 1 do
       post users_path, params: { user: { name:  "テスト",
                                         profile: "https://libecity.com/user_profile/test",
