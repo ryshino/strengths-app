@@ -16,12 +16,22 @@ class EpisodeTest < ActiveSupport::TestCase
     assert_not @episode.valid?
   end
 
-  test "エピソードの存在性のバリデーションに対するテスト" do
+  test "タイトルの存在性のバリデーションに対するテスト" do
+    @episode.title = "   "
+    assert_not @episode.valid?
+  end
+
+  test "内容の存在性のバリデーションに対するテスト" do
     @episode.content = "   "
     assert_not @episode.valid?
   end
 
-  test "エピソードの文字制限に対するテスト(文字制限は変更の予定)" do
+  test "タイトルの文字制限に対するテスト(文字制限は変更の予定)" do
+    @episode.title = "a" * 21
+    assert_not @episode.valid?
+  end
+
+  test "内容の文字制限に対するテスト(文字制限は変更の予定)" do
     @episode.content = "a" * 1001
     assert_not @episode.valid?
   end
