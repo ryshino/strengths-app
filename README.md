@@ -1,12 +1,12 @@
 # Readme
 
 ## 【非公式】ストレングスファインダーエピソード共有アプリ
-サイトURL: https://strengths-app.onrender.com/<br>
+<p><a href="https://strengths-app.onrender.com/" target="_blank" rel="noopener noreferrer">サイトURL</a></p>
 オンラインコミュニティ『リベシティ』ユーザー向けに、ストレングスファインダーに関する自分のエピソードを投稿できるサイトを作成しました。<br>
 ※当サイトはリベシティユーザーのみ利用できる仕様となっております。<br>
 その為、上記はデモアプリのURLとなります。<br>
 サイトの動作について説明した記事をQiitaに限定公開しました。<br>
-https://qiita.com/yatchi_323/private/968f9121139472fceffe
+<p><a href="https://qiita.com/yatchi_323/private/968f9121139472fceffe/" target="_blank" rel="noopener noreferrer">説明記事</a></p>
 
 ### ログイン方法
 プロフィールURL: https://\libecity.com/user_profile/test <br>
