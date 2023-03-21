@@ -10,9 +10,9 @@ end
 
 class EpisodesInterfaceTest < EpisodesInterface
 
-  test "エラーを表示し、無効な送信に対してエピソードを作成しているかテスト" do
+  test "無効な送信に対してエピソードを作成せず、エラーを表示しているかテスト" do
     assert_no_difference 'Episode.count' do
-      post episodes_path, params: { episode: { content: "", tag_ids: [@tag.id] } }
+      post episodes_path, params: { episode: { title: "", content: "", tag_ids: [@tag.id] } }
     end
     assert_select 'div#error_explanation'
   end
