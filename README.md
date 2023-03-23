@@ -4,7 +4,7 @@
 <h3><a href="https://strengths-app.onrender.com/" target="_blank" rel="noopener noreferrer">サイトURL</a></h3>
 
 ### ログイン方法
-プロフィールURL: https://\libecity.com/user_profile/test <br>
+プロフィールURL: https://libecity.com/user_profile/test <br>
 パスワード: foobar
 
 オンラインコミュニティ『リベシティ』ユーザー向けに、ストレングスファインダーに関する自分のエピソードを投稿できるサイトを作成しました。<br>
