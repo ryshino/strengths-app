@@ -1,7 +1,7 @@
 # Readme
 
 ## 【非公式】ストレングスファインダーエピソード共有アプリ
-<h3><a href="https://strengths-app.onrender.com/" target="_blank" rel="noopener noreferrer">サイトURL</a></h3><br>
+<h3><a href="https://strengths-app.onrender.com/" target="_blank" rel="noopener noreferrer">サイトURL</a></h3>
 
 ### ログイン方法
 プロフィールURL: https://\libecity.com/user_profile/test <br>
