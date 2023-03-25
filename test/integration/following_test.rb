@@ -13,7 +13,7 @@ class FollowPagesTest < Following
   test "フォローページのテスト" do
     get following_user_path(@user)
     assert_response :unprocessable_entity
-    # each文が1度も実行されないままテストがパスするのを防ぐため記述
+    # @userが空である可能性を見落とさないためにassert_notを実行している
     assert_not @user.following.empty?
     assert_match @user.following.count.to_s, response.body
     @user.following.each do |user|
@@ -24,7 +24,7 @@ class FollowPagesTest < Following
   test "フォロワーページのテスト" do
     get followers_user_path(@user)
     assert_response :unprocessable_entity
-    # each文が1度も実行されないままテストがパスするのを防ぐため記述
+    # @userが空である可能性を見落とさないためにassert_notを実行している
     assert_not @user.followers.empty?
     assert_match @user.followers.count.to_s, response.body
     @user.followers.each do |user|
