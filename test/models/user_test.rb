@@ -100,6 +100,11 @@ class UserTest < ActiveSupport::TestCase
     # フォロワーがいるユーザー自身の投稿を確認
     michael.episodes.each do |post_self|
       assert michael.feed.include?(post_self)
+      assert_equal michael.feed.distinct, michael.feed
+    end
+    # フォロワーがいないユーザー自身の投稿を確認
+    archer.episodes.each do |post_self|
+      assert archer.feed.include?(post_self)
     end
     # フォローしていないユーザーの投稿を確認
     archer.episodes.each do |post_unfollowed|

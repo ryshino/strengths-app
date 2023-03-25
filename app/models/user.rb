@@ -82,10 +82,11 @@ class User < ApplicationRecord
 
   # フォローされているユーザーか、現在のユーザーに対応するuser_idを持つ
   # エピソードを返す
-  # https://railsguides.jp/active_record_querying.html#or条件
-  # https://rakuda3desu.net/rakudas-rails-tutorial14-3/
   def feed
-    Episode.where(user: following).or(Episode.where(user_id: id))
+    part_of_feed = "relationships.follower_id = :id or episodes.user_id = :id"
+    Episode.left_outer_joins(user: :followers)
+            .where(part_of_feed, { id: id }).distinct
+            .includes(:user, image_attachment: :blob)
   end
 
   # ユーザーをフォローする
