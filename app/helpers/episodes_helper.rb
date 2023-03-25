@@ -7,7 +7,7 @@ module EpisodesHelper
 
   def episode_tags_info(episode)
     # 選択されたタグの多い順、同数の場合はタグ名で昇順にしている
-    tag_counts = episode.tags.group("tags.id, tags.name").count.sort_by { |name, count| [-count, name] }
+    tag_counts = episode.tags.group(:name).count.sort_by { |name, count| [-count, name] }
     tag_name, tag_count = tag_counts.first
     {
       tag_name: tag_name,

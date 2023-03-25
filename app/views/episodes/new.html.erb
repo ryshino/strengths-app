@@ -24,7 +24,7 @@
               資質を選択する (2つまで)
             </div>
             <div class="collapse-content"> 
-              <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name, { include_hidden: false }) do |tag| %>
+              <%= f.collection_check_boxes(:tag_ids, @tags, :id, :name, { include_hidden: false }) do |tag| %>
                 <%= render 'tags/containing_element', tag: tag %>
                 <%= tag.check_box %>
                 <%= tag.text %>

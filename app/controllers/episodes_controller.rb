@@ -6,7 +6,7 @@ class EpisodesController < ApplicationController
   def index
     @episodes = @q.result.page(params[:page]).per(12)
     @episode  = current_user.episodes.build
-    
+    @tags = Tag.all.order(:id)
     if @episodes.blank?
       flash.now[:success] = "該当のエピソードは見つかりませんでした。"
     end
@@ -14,7 +14,7 @@ class EpisodesController < ApplicationController
 
   def new
     @episode = Episode.new
-    
+    @tags = Tag.all.order(:id)
   end
 
   def create
@@ -52,7 +52,7 @@ class EpisodesController < ApplicationController
 
   def show
     @episode = Episode.find(params[:id])
-    
+    @tags = Tag.all.order(:id)
     @tag_relation = current_user.tag_relations.find_or_initialize_by(episode_id: @episode.id)
     @current_user_select_tags = current_user.tag_relations.where(episode_id: @episode.id).pluck(:tag_id)
     @episode_tags = @episode.tags.group(:name).count.sort_by { |name, count| [-count, name] }
