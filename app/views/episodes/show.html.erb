@@ -77,7 +77,7 @@
                 <%= form_with model: @tag_relation, url: tag_relations_path do |f| %>
                   <%= render 'shared/error_messages', object: f.object %>
                   <%= f.hidden_field :episode_id, value: @episode.id %>
-                    <%= f.collection_check_boxes(:tag_id, @tags, :id, :name, {checked: @current_user_select_tags, include_hidden: false}) do |tag| %>
+                    <%= f.collection_check_boxes(:tag_id, Tag.all, :id, :name, {checked: @current_user_select_tags, include_hidden: false}) do |tag| %>
                       <%= render 'tags/containing_element', tag: tag %>
                       <%= tag.check_box %>
                       <%= tag.text %>

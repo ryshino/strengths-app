@@ -17,7 +17,7 @@
                 資質で検索する
               </div>
               <div class="collapse-content"> 
-                <%= f.collection_check_boxes :tags_id_in, @tags, :id, :name, {include_hidden: false} do |tag| %>
+                <%= f.collection_check_boxes :tags_id_in, Tag.all, :id, :name, {include_hidden: false} do |tag| %>
                   <%= render 'tags/containing_element', tag: tag %>
                   <%= tag.label do %>
                     <%= tag.check_box %>
