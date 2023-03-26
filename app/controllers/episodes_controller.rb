@@ -34,6 +34,7 @@ class EpisodesController < ApplicationController
       flash[:success] = "エピソードを投稿しました"
       redirect_to episodes_path
     else
+      @tags = Tag.all.order(:id)
       render 'new', status: :unprocessable_entity
     end
   end
