@@ -22,6 +22,7 @@ class EpisodesController < ApplicationController
     @tag_ids = params[:episode][:tag_ids]
     unless @tag_ids.nil?
       if @tag_ids.count > 2
+        @tags = Tag.all.order(:id)
         flash[:danger] = "選択できる資質は2つまでです"
         render 'new', status: :unprocessable_entity and return
       end
