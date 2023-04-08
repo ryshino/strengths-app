@@ -1,4 +1,9 @@
 <% @user ||= current_user %>
+<div class=px-4 py-8">
+  <% unless @user == current_user %>
+    <%= render 'follow_form' if logged_in? %>
+  <% end %>
+</div>
 <div class="stats">
   <a href="<%= following_user_path(@user) %>" class="flex link link-info">
     <strong id="following" class="stat w-1/3">

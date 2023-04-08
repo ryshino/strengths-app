@@ -6,9 +6,13 @@
     <div class="card card-side bg-base-100 shadow-xl">
       <figure class="w-1/3">
         <% if user.profile_icon.attached? %>
-          <%= image_tag user.profile_icon %>
+          <%= link_to user_path(user) do %>
+            <%= image_tag user.profile_icon %>
+          <% end %>
         <% else %>
-          <%= image_tag("no_image.jpg", alt: "no_image") %>
+          <%= link_to user_path(user) do %>
+            <%= image_tag("no_image.jpg", alt: "no_image") %>
+          <% end %>
         <% end %>
       </figure>
       <div class="card-body">

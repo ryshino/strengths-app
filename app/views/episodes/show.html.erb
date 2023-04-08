@@ -16,6 +16,11 @@
             </div>
             <%= link_to @episode.user.name, user_path(@episode.user.id), class:"text-2xl font-bold px-4 py-8 link link-hover" %>
           </div>
+          <div class="w-1/3 py-8">
+            <%= link_to "#{@episode.user.profile}", target: :_blank, rel: "noopener noreferrer" do  %>
+              <p class="btn btn-outline justify-end">リベシティのプロフィール</p>
+            <% end %>
+          </div>
           <%
 =begin%>
 <div class="w-1/3 px-4 py-8">
