@@ -6,9 +6,13 @@
             <div class="avatar">
               <div class="w-12 rounded-full">
                 <% if episode.user.profile_icon.attached? %>
-                  <%= image_tag episode.user.profile_icon %>
+                  <%= link_to user_path(episode.user) do %>
+                    <%= image_tag episode.user.profile_icon %>
+                  <% end %>
                 <% else %>
-                  <%= image_tag("no_image.jpg", alt: "no_image") %>
+                  <%= link_to user_path(episode.user) do %>
+                    <%= image_tag("no_image.jpg", alt: "no_image") %>
+                  <% end %>
                 <% end %>
               </div>
             </div>
