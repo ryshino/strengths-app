@@ -2,7 +2,7 @@ require "test_helper"
 
 class EpisodesInterface < ActionDispatch::IntegrationTest
   def setup
-    @user = users(:michael)
+    @user = users(:archer)
     @tag_1 = tags(:tag_1)
     @tag_2 = tags(:tag_2)
     @tag_3 = tags(:tag_3)
@@ -53,7 +53,7 @@ class EpisodesInterfaceTest < EpisodesInterface
   end
 
   test "他のユーザーの投稿に対しては削除リンクが存在しないことをテスト" do
-    get user_path(users(:archer))
+    get user_path(users(:lana))
     assert_select 'a', { text: '削除', count: 0 }
   end
 end

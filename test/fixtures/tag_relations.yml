@@ -1,0 +1,7 @@
+achievement:
+  user: michael
+  episode: most_recent
+  tag: tag_1
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
+
