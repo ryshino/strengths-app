@@ -9,7 +9,7 @@ class EpisodesShowTest < ActionDispatch::IntegrationTest
     @tag_1 = tags(:tag_1)
     @tag_2 = tags(:tag_2)
     @tag_3 = tags(:tag_3)
-    @episode = @user.episodes.first
+    @episode = @user.episodes.find_by(title: "most_recent title")
     log_in_as(@user)
   end
 
@@ -17,6 +17,7 @@ class EpisodesShowTest < ActionDispatch::IntegrationTest
     get episode_path(@episode)
     assert_template 'episodes/show'
     assert_select 'title', "エピソード | StrengthsApp"
+    assert_select 'p.card-title', "most_recent title"
     assert_match @episode.title, response.body
     assert_match @episode.content, response.body
     assert_match @user.name, response.body

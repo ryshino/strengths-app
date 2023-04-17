@@ -4,4 +4,3 @@ achievement:
   tag: tag_1
   created_at: <%= Time.now %>
   updated_at: <%= Time.now %>
-

@@ -17,7 +17,7 @@ cat_video:
   user: michael
 
 most_recent:
-  title: "sample title"
+  title: "most_recent title"
   content: "Writing a short test"
   created_at: <%= Time.zone.now %>
   user: michael

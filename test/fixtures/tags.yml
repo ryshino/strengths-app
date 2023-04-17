@@ -1,4 +1,68 @@
-<% 34.times do |n| %>
-tag_<%= n %>:
-  name: <%= n %>
-<% end %>
+tag_1:
+  name: "達成欲"
+tag_2:
+  name: "アレンジ"
+tag_3:
+  name: "信念"
+tag_4:
+  name: "公平性"
+tag_5:
+  name: "慎重さ"
+tag_6:
+  name: "規律性"
+tag_7:
+  name: "目標志向"
+tag_8:
+  name: "責任感"
+tag_9:
+  name: "回復志向"
+tag_10:
+  name: "活発性"
+tag_11:
+  name: "指令性"
+tag_12:
+  name: "コミュニケーション"
+tag_13:
+  name: "競争性"
+tag_14:
+  name: "最上志向"
+tag_15:
+  name: "自己確信"
+tag_16:
+  name: "自我"
+tag_17:
+  name: "社交性"
+tag_18:
+  name: "適応性"
+tag_19:
+  name: "運命思考"
+tag_20:
+  name: "成長促進"
+tag_21:
+  name: "共感性"
+tag_22:
+  name: "調和性"
+tag_23:
+  name: "包含"
+tag_24:
+  name: "個別化"
+tag_25:
+  name: "ポジティブ"
+tag_26:
+  name: "親密性"
+tag_27:
+  name: "分析思考"
+tag_28:
+  name: "原点思考"
+tag_29:
+  name: "未来志向"
+tag_30:
+  name: "着想"
+tag_31:
+  name: "収集心"
+tag_32:
+  name: "内省"
+tag_33:
+  name: "学習欲"
+tag_34:
+  name: "戦略性"
