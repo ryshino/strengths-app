@@ -21,6 +21,7 @@ class EpisodesShowTest < ActionDispatch::IntegrationTest
     assert_match @episode.title, response.body
     assert_match @episode.content, response.body
     assert_match @user.name, response.body
+    assert_match @user.profile, response.body
     assert @user.profile_icon.attached?
     assert @user.strength_image.attached?
     @episode.tags.each do |tag|
